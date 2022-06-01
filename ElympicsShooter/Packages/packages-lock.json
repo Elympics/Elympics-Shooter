@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.daftmobile.elympics": {
+      "version": "https://github.com/Elympics/Unity-SDK.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ecc5be9465e642138bbdde0251e6ab6bfc0deca9"
+    },
     "com.unity.collab-proxy": {
       "version": "1.15.16",
       "depth": 0,
