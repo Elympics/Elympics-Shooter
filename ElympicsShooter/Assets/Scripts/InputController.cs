@@ -31,6 +31,8 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 	{
 		inputWriter.Write(inputProvider.Movement.x);
 		inputWriter.Write(inputProvider.Movement.y);
+
+		inputWriter.Write(inputProvider.Jump);
 	}
 
 	public void ApplyInput(ElympicsPlayer player, IInputReader inputDeserializer)
@@ -38,14 +40,16 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		inputDeserializer.Read(out float forwardMovement);
 		inputDeserializer.Read(out float rightMovement);
 
+		inputDeserializer.Read(out bool jump);
+
 		if (playerData.PlayerId != (int)player)
 			return;
 
-		ProcessMovement(forwardMovement, rightMovement);
+		ProcessMovement(forwardMovement, rightMovement, jump);
 	}
 
-	private void ProcessMovement(float forwardMovement, float rightMovement)
+	private void ProcessMovement(float forwardMovement, float rightMovement, bool jump)
 	{
-		movementController.ProcessMovement(forwardMovement, rightMovement);
+		movementController.ProcessMovement(forwardMovement, rightMovement, jump);
 	}
 }

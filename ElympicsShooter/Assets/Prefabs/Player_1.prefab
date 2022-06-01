@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6765057966925682971, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6765057966925682971, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: predictableFor.playerIndex

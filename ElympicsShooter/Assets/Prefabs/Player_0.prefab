@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334c2a3facb248ac8c1a599797c52dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceNetworkId: 0
-  networkId: 6
+  forceNetworkId: 1
+  networkId: 10
   predictableFor:
     playerIndex: 0
   visibleFor:
@@ -257,7 +257,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6765057966925682973}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 160
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -341,6 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   acceleration: 80
+  jumpForce: 1000
 --- !u!114 &250967938
 MonoBehaviour:
   m_ObjectHideFlags: 0
