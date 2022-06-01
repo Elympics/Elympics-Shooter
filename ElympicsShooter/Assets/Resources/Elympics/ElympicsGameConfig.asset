@@ -16,19 +16,19 @@ MonoBehaviour:
   gameId: fe9b83a9-7d50-4299-859a-93fd313f420b
   gameVersion: 1
   players: 2
-  gameplayScene: 
-  gameplaySceneAsset: {fileID: 0}
+  gameplayScene: Assets/Scenes/ShooterDemo.unity
+  gameplaySceneAsset: {fileID: 102900000, guid: 4017d0c265479cf42b58ee5ffb79b3bc, type: 3}
   botsInServer: 1
   useWeb: 0
   enableReconnect: 0
   connectOnGameplaySceneLoad: 1
-  ticksPerSecond: 30
+  ticksPerSecond: 50
   snapshotSendingPeriodInTicks: 1
-  inputLagTicks: 2
-  maxAllowedLagInTicks: 15
+  inputLagTicks: 1
+  maxAllowedLagInTicks: 2
   prediction: 1
-  predictionLimitInTicks: 8
-  mode: 0
+  predictionLimitInTicks: 2
+  mode: 1
   halfRemoteMode: 0
   useWebInHalfRemote: 0
   ipForHalfRemoteMode: 127.0.0.1
@@ -36,12 +36,12 @@ MonoBehaviour:
   webPortForHalfRemoteMode: 9102
   playerIndexForHalfRemoteMode: 1
   testPlayers:
-  - userId: 
+  - userId: 0
     isBot: 0
     botDifficulty: 0
     gameEngineData: 
     matchmakerData: []
-  - userId: 
+  - userId: 1
     isBot: 0
     botDifficulty: 0
     gameEngineData: 
