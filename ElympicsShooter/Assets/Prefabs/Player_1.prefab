@@ -67,5 +67,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_1
       objectReference: {fileID: 0}
+    - target: {fileID: 8914176383838103783, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: isDefaultCamera
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae807096dc5026c448b1731d823d179a, type: 3}

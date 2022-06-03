@@ -8,6 +8,7 @@ public class InputProvider : MonoBehaviour
 	public Vector2 Movement => movement;
 
 	public bool Jump { get; private set; }
+	public bool WeaponPrimaryAction { get; private set; }
 
 	private void Update()
 	{
@@ -15,5 +16,7 @@ public class InputProvider : MonoBehaviour
 		movement.y = Input.GetAxis("Vertical");
 
 		Jump = Input.GetButton("Jump");
+
+		WeaponPrimaryAction = Input.GetButton("Fire1");
 	}
 }

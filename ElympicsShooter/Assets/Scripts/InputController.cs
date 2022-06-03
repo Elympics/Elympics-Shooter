@@ -8,6 +8,7 @@ using System;
 public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializable
 {
 	[SerializeField] private MovementController movementController = null;
+	[SerializeField] private LoadoutController loadoutController = null;
 	[SerializeField] private PlayerData playerData = null;
 
 	private InputProvider inputProvider = null;
@@ -33,6 +34,8 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		inputWriter.Write(inputProvider.Movement.y);
 
 		inputWriter.Write(inputProvider.Jump);
+
+		inputWriter.Write(inputProvider.WeaponPrimaryAction);
 	}
 
 	public void ApplyInput(ElympicsPlayer player, IInputReader inputDeserializer)
@@ -41,11 +44,18 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		inputDeserializer.Read(out float rightMovement);
 
 		inputDeserializer.Read(out bool jump);
+		inputDeserializer.Read(out bool weaponPrimaryAction);
 
 		if (playerData.PlayerId != (int)player)
 			return;
 
 		ProcessMovement(forwardMovement, rightMovement, jump);
+		ProcessLoadoutActions(weaponPrimaryAction);
+	}
+
+	private void ProcessLoadoutActions(bool weaponPrimaryAction)
+	{
+		loadoutController.ProcessWeaponActions(weaponPrimaryAction);
 	}
 
 	private void ProcessMovement(float forwardMovement, float rightMovement, bool jump)

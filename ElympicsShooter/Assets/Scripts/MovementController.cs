@@ -34,8 +34,6 @@ public class MovementController : ElympicsMonoBehaviour
 	private void ApplyJump()
 	{
 		rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-		Debug.Log("Added jump force: " + (Vector3.up * jumpForce) + ", but rigidbody is: " + rigidbody.velocity);
 	}
 
 	private void ApplyMovement(Vector3 movementDirection)
