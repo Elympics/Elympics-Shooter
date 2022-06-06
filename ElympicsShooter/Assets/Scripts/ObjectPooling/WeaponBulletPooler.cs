@@ -12,9 +12,9 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 
 	private ElympicsArray<ElympicsGameObject> poolerBullets = null;
 	private ElympicsBool createBulletsRPC = new ElympicsBool(false);
+	private ElympicsInt currentAvailableBullet = new ElympicsInt(0);
 
-	private TestRocketBullet bulletPrefab = null;
-
+	private ProjectileBullet bulletPrefab = null;
 
 	public void Initialize()
 	{
@@ -36,6 +36,7 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 		for (int i = 0; i < poolerBullets.Values.Count; i++)
 		{
 			var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.World);
+			createdBullet.GetComponent<ProjectileBullet>().SetPooler(this);
 			createdBullet.transform.position = defaultSpawnPosition;
 			poolerBullets.Values[i].Value = createdBullet.gameObject.GetComponent<ElympicsBehaviour>();
 		}
@@ -43,12 +44,28 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 		createBulletsRPC.Value = false;
 	}
 
-	private void OnValidate()
+	public ProjectileBullet GetBullet()
 	{
-		var rocketLauncher = GetComponent<RocketLauncher>();
+		var bulletToTake = poolerBullets.Values[currentAvailableBullet].Value.GetComponent<ProjectileBullet>();
+		bulletToTake.OnTaken();
 
-		this.bulletPrefab = rocketLauncher.BulletPrefab;
+		int newAvailableBulletIndex = currentAvailableBullet.Value + 1;
+
+		if (newAvailableBulletIndex >= poolerBullets.Values.Count)
+			newAvailableBulletIndex = 0;
+
+		currentAvailableBullet.Value = newAvailableBulletIndex;
+
+		return bulletToTake;
 	}
+
+	public void ReturnBullet(ProjectileBullet returnedBullet)
+	{
+		returnedBullet.OnReturned();
+		returnedBullet.transform.position = defaultSpawnPosition;
+	}
+
+	#region Pooler Auto Management
 
 	[ContextMenu("Get recommendation for safe number of bullets")]
 	private void AutoFillNumberNecessaryBullets()
@@ -67,4 +84,12 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 
 		return spawnsInOneBulletLifetime;
 	}
+
+	private void OnValidate()
+	{
+		var rocketLauncher = GetComponent<RocketLauncher>();
+		this.bulletPrefab = rocketLauncher.BulletPrefab;
+	}
+
+	#endregion
 }

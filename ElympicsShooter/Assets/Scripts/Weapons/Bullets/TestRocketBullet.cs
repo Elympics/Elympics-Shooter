@@ -22,7 +22,7 @@ public class TestRocketBullet : ElympicsMonoBehaviour
 
 	private IEnumerator DeathTimer()
 	{
-		yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(timeToSelfDestroy);
 
 		ElympicsDestroy(this.gameObject);
 	}
