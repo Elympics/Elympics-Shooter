@@ -23,7 +23,8 @@ public class MovementController : ElympicsMonoBehaviour
 
 	public void ProcessMovement(float forwardMovementValue, float rightMovementValue, bool jump)
 	{
-		Vector3 movementDirection = new Vector3(forwardMovementValue, 0, rightMovementValue);
+		Vector3 inputVector = new Vector3(forwardMovementValue, 0, rightMovementValue);
+		Vector3 movementDirection = inputVector != Vector3.zero ? this.transform.TransformDirection(inputVector.normalized) : Vector3.zero;
 
 		ApplyMovement(movementDirection);
 

@@ -8,6 +8,7 @@ using System;
 public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializable
 {
 	[SerializeField] private MovementController movementController = null;
+	[SerializeField] private ViewController viewController = null;
 	[SerializeField] private LoadoutController loadoutController = null;
 	[SerializeField] private PlayerData playerData = null;
 
@@ -30,11 +31,17 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 
 	private void SerializeInput(IInputWriter inputWriter)
 	{
+		//movement
 		inputWriter.Write(inputProvider.Movement.x);
 		inputWriter.Write(inputProvider.Movement.y);
 
-		inputWriter.Write(inputProvider.Jump);
+		//mouse
+		inputWriter.Write(inputProvider.MouseAxis.x);
+		inputWriter.Write(inputProvider.MouseAxis.y);
+		inputWriter.Write(inputProvider.MouseAxis.z);
 
+		//action buttons
+		inputWriter.Write(inputProvider.Jump);
 		inputWriter.Write(inputProvider.WeaponPrimaryAction);
 	}
 
@@ -43,6 +50,10 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		inputDeserializer.Read(out float forwardMovement);
 		inputDeserializer.Read(out float rightMovement);
 
+		inputDeserializer.Read(out float xRotation);
+		inputDeserializer.Read(out float yRotation);
+		inputDeserializer.Read(out float zRotation);
+
 		inputDeserializer.Read(out bool jump);
 		inputDeserializer.Read(out bool weaponPrimaryAction);
 
@@ -50,7 +61,15 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 			return;
 
 		ProcessMovement(forwardMovement, rightMovement, jump);
+
+		ProcessMouse(Quaternion.Euler(new Vector3(xRotation, yRotation, zRotation)));
+
 		ProcessLoadoutActions(weaponPrimaryAction);
+	}
+
+	private void ProcessMouse(Quaternion mouseRotation)
+	{
+		viewController.ProcessView(mouseRotation);
 	}
 
 	private void ProcessLoadoutActions(bool weaponPrimaryAction)

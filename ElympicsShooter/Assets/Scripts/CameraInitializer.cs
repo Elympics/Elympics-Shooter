@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerData))]
 public class CameraInitializer : ElympicsMonoBehaviour, IInitializable
 {
-	[SerializeField] private bool isDefaultCamera = false;
-
 	public void Initialize()
 	{
 		var playerData = GetComponent<PlayerData>();
@@ -17,11 +15,16 @@ public class CameraInitializer : ElympicsMonoBehaviour, IInitializable
 	{
 		var camerasInChildren = GetComponentsInChildren<Camera>();
 
-		bool enableCamera = ((int)Elympics.Player == playerData.PlayerId) || isDefaultCamera;
+		bool enableCamera = false;
+
+		if (Elympics.IsClient)
+			enableCamera = (int)Elympics.Player == playerData.PlayerId;
+		else if (Elympics.IsServer)
+			enableCamera = playerData.PlayerId == 0;
 
 		foreach (Camera camera in camerasInChildren)
 		{
-			camera.gameObject.SetActive(enableCamera);
+			camera.enabled = enableCamera;
 
 			if (camera.TryGetComponent<AudioListener>(out AudioListener audioListener))
 			{
