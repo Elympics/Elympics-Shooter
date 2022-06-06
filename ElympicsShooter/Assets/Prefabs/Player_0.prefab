@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4403710236256967894}
   - component: {fileID: 8687269955033791109}
   - component: {fileID: 4548380204345389350}
+  - component: {fileID: 3269530898938994276}
   m_Layer: 0
   m_Name: TestRocketLauncher
   m_TagString: Untagged
@@ -130,6 +131,21 @@ MonoBehaviour:
   fireRate: 60
   bulletSpawnPoint: {fileID: 1420771061051681834}
   bulletPrefab: {fileID: 7875569858094418476, guid: 17b56b5d362346447a871c456e788d52, type: 3}
+  weaponBulletPooler: {fileID: 3269530898938994276}
+--- !u!114 &3269530898938994276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176117059227933393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95647dfd974b2ed45aa3d54d7c8aa506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpawnPosition: {x: 99999, y: 99999, z: 99999}
+  numberOfNecessaryBullets: 6
 --- !u!1 &4921512789875321886
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 16
+  networkId: 30
   predictableFor:
     playerIndex: 0
   visibleFor:

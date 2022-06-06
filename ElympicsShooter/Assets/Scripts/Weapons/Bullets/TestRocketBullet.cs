@@ -8,6 +8,9 @@ public class TestRocketBullet : ElympicsMonoBehaviour
 {
 	[SerializeField] private float damage = 10.0f;
 	[SerializeField] private float speed = 5.0f;
+	[SerializeField] private float timeToSelfDestroy = 5.0f;
+
+	public float TimeToSelfDestroy => timeToSelfDestroy;
 
 	public void Initialize()
 	{

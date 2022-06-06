@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ElympicsGameConfig
   m_EditorClassIdentifier: 
   gameName: ElympicsShooter
-  gameId: fe9b83a9-7d50-4299-859a-93fd313f420b
+  gameId: eae33548-47fd-4bfb-bf15-c516056818e0
   gameVersion: 1
   players: 2
   gameplayScene: Assets/Scenes/ShooterDemo.unity
@@ -28,7 +28,7 @@ MonoBehaviour:
   maxAllowedLagInTicks: 2
   prediction: 1
   predictionLimitInTicks: 2
-  mode: 1
+  mode: 0
   halfRemoteMode: 0
   useWebInHalfRemote: 0
   ipForHalfRemoteMode: 127.0.0.1

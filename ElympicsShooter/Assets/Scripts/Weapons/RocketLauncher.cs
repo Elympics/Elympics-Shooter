@@ -7,6 +7,9 @@ public class RocketLauncher : Weapon
 {
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private TestRocketBullet bulletPrefab = null;
+	[SerializeField] private WeaponBulletPooler weaponBulletPooler = null;
+
+	public TestRocketBullet BulletPrefab => bulletPrefab;
 
 	protected override void ProcessBulletSpawn()
 	{

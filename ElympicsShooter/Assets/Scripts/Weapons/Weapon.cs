@@ -6,8 +6,10 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 	[SerializeField] protected float damage = 0.0f;
 	[SerializeField] [Tooltip("Shots per minute")] protected float fireRate = 60.0f;
 
-	private ElympicsFloat timeBetweenShoots = new ElympicsFloat();
-	private ElympicsFloat currentTimeBetweenShoots = new ElympicsFloat();
+	protected ElympicsFloat currentTimeBetweenShoots = new ElympicsFloat();
+
+	protected float timeBetweenShoots = 0.0f;
+	public float TimeBetweenShoots => timeBetweenShoots;
 
 	private bool IsReadyToShot => currentTimeBetweenShoots >= timeBetweenShoots;
 
@@ -16,9 +18,9 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 		CalculateTimeBetweenShoots();
 	}
 
-	private void CalculateTimeBetweenShoots()
+	public void CalculateTimeBetweenShoots()
 	{
-		timeBetweenShoots.Value = 60.0f / fireRate;
+		timeBetweenShoots = 60.0f / fireRate;
 	}
 
 	public void ExecutePrimaryAction()
