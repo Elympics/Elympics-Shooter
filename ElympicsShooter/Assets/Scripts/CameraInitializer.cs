@@ -20,6 +20,13 @@ public class CameraInitializer : ElympicsMonoBehaviour, IInitializable
 		bool enableCamera = ((int)Elympics.Player == playerData.PlayerId) || isDefaultCamera;
 
 		foreach (Camera camera in camerasInChildren)
+		{
 			camera.gameObject.SetActive(enableCamera);
+
+			if (camera.TryGetComponent<AudioListener>(out AudioListener audioListener))
+			{
+				Destroy(audioListener);
+			}
+		}
 	}
 }

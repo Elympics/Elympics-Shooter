@@ -10,10 +10,12 @@ public class RocketLauncher : Weapon
 
 	protected override void ProcessBulletSpawn()
 	{
-		var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.World);
-		if (createdBullet.TryGetComponent(out TestRocketBullet testRocketBullet))
-		{
-			testRocketBullet.Initialize();
-		}
+		//TODO: Use object pooling or execute it in Elympcis Update, until then:
+		Debug.Log("Pew pew!");
+		//var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.World);
+		//if (createdBullet.TryGetComponent(out TestRocketBullet testRocketBullet))
+		//{
+		//	testRocketBullet.Initialize();
+		//}
 	}
 }
