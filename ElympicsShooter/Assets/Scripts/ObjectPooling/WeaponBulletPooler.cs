@@ -15,6 +15,7 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 	private ElympicsInt currentAvailableBullet = new ElympicsInt(0);
 
 	private ProjectileBullet bulletPrefab = null;
+	private Weapon weapon = null;
 
 	public void Initialize()
 	{
@@ -36,8 +37,15 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 		for (int i = 0; i < poolerBullets.Values.Count; i++)
 		{
 			var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.World);
-			createdBullet.GetComponent<ProjectileBullet>().SetPooler(this);
+
+			var projectileBullet = createdBullet.GetComponent<ProjectileBullet>();
+			projectileBullet.SetPooler(this);
+			projectileBullet.SetOwner(weapon.Owner);
+
 			createdBullet.transform.position = defaultSpawnPosition;
+
+			projectileBullet.Initialize();
+
 			poolerBullets.Values[i].Value = createdBullet.gameObject.GetComponent<ElympicsBehaviour>();
 		}
 
@@ -88,6 +96,8 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 	private void OnValidate()
 	{
 		var rocketLauncher = GetComponent<RocketLauncher>();
+
+		this.weapon = rocketLauncher;
 		this.bulletPrefab = rocketLauncher.BulletPrefab;
 	}
 

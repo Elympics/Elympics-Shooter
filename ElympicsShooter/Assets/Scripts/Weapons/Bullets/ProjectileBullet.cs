@@ -6,16 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 {
-	[SerializeField] protected float damage = 10.0f;
 	[SerializeField] protected float speed = 5.0f;
 	[SerializeField] protected float timeToSelfDestroy = 5.0f;
+
+	[SerializeField] private ExplosionArea explosionAreaPrefab = null;
 
 	public float TimeToSelfDestroy => timeToSelfDestroy;
 
 	protected new Rigidbody rigidbody = null;
 	protected new Collider collider = null;
 
+	protected ElympicsGameObject explosionAreaInstance = new ElympicsGameObject(null);
+
 	private WeaponBulletPooler assignedPooler = null;
+	private GameObject owner = null;
 	private Coroutine deathTimerCoroutine = null;
 
 	private void Awake()
@@ -27,6 +31,19 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 	public void SetPooler(WeaponBulletPooler assignedPooler)
 	{
 		this.assignedPooler = assignedPooler;
+	}
+
+	public void SetOwner(GameObject owner)
+	{
+		this.owner = owner;
+	}
+
+	public void Initialize()
+	{
+		var explosionAreaInstance = ElympicsInstantiate(explosionAreaPrefab.gameObject.name, ElympicsPlayer.World);
+
+		explosionAreaInstance.transform.position = this.transform.position;
+		this.explosionAreaInstance.Value = explosionAreaInstance.GetComponent<ElympicsBehaviour>();
 	}
 
 	public void Launch(Vector3 direction)
@@ -46,8 +63,28 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 	{
 		yield return new WaitForSeconds(timeToSelfDestroy);
 
+		DestroyProjectile();
+	}
+
+	private void DestroyProjectile()
+	{
 		assignedPooler.ReturnBullet(this);
 		deathTimerCoroutine = null;
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.transform.root.gameObject == owner)
+			return;
+
+		DetonateProjectile();
+		DestroyProjectile();
+	}
+
+	private void DetonateProjectile()
+	{
+		explosionAreaInstance.Value.transform.position = this.transform.position;
+		explosionAreaInstance.Value.GetComponent<ExplosionArea>().Detonate();
 	}
 
 	public virtual void OnTaken()

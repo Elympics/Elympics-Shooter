@@ -13,6 +13,8 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 
 	private bool IsReadyToShot => currentTimeBetweenShoots >= timeBetweenShoots;
 
+	public GameObject Owner => this.transform.root.gameObject;
+
 	public void Initialize()
 	{
 		CalculateTimeBetweenShoots();
