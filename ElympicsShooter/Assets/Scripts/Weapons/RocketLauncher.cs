@@ -7,16 +7,28 @@ public class RocketLauncher : Weapon
 {
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private ProjectileBullet bulletPrefab = null;
-	[SerializeField] private WeaponBulletPooler weaponBulletPooler = null;
 
 	public ProjectileBullet BulletPrefab => bulletPrefab;
 
+	private ElympicsBool createBullet = new ElympicsBool(false);
+
 	protected override void ProcessBulletSpawn()
 	{
-		var bullet = weaponBulletPooler.GetBullet();
+		createBullet.Value = true;
+	}
 
-		bullet.transform.position = bulletSpawnPoint.position;
+	public override void ElympicsUpdate()
+	{
+		base.ElympicsUpdate();
 
-		bullet.Launch(bulletSpawnPoint.transform.forward);
+		if (createBullet)
+		{
+			var bullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.All);
+			bullet.GetComponent<ProjectileBullet>().SetOwner(Owner.gameObject.transform.root.gameObject);
+			bullet.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
+			bullet.transform.position = bulletSpawnPoint.position;
+
+			createBullet.Value = false;
+		}
 	}
 }

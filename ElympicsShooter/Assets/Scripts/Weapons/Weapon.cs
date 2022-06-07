@@ -42,7 +42,7 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 
 	protected abstract void ProcessBulletSpawn();
 
-	public void ElympicsUpdate()
+	public virtual void ElympicsUpdate()
 	{
 		if (!IsReadyToShot)
 		{

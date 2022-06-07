@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2700570454107921576}
   - component: {fileID: 6982871195170110203}
   - component: {fileID: 2844113424943771992}
-  - component: {fileID: 3835079663172034074}
   m_Layer: 0
   m_Name: RocketLauncher
   m_TagString: Untagged
@@ -131,21 +130,6 @@ MonoBehaviour:
   fireRate: 60
   bulletSpawnPoint: {fileID: 851411662769384532}
   bulletPrefab: {fileID: 7043128056353641736, guid: 17b56b5d362346447a871c456e788d52, type: 3}
-  weaponBulletPooler: {fileID: 3835079663172034074}
---- !u!114 &3835079663172034074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456089836817701551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95647dfd974b2ed45aa3d54d7c8aa506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSpawnPosition: {x: 99999, y: 99999, z: 99999}
-  numberOfNecessaryBullets: 6
 --- !u!1 &7797543503229190934
 GameObject:
   m_ObjectHideFlags: 0

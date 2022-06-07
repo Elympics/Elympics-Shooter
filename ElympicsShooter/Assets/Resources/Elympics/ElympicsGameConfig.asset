@@ -28,7 +28,7 @@ MonoBehaviour:
   maxAllowedLagInTicks: 2
   prediction: 1
   predictionLimitInTicks: 2
-  mode: 1
+  mode: 0
   halfRemoteMode: 0
   useWebInHalfRemote: 0
   ipForHalfRemoteMode: 127.0.0.1

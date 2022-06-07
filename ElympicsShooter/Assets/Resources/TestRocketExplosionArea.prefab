@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionDamage: 10
   explosionRange: 2
+  timeToDestroy: 1
   explosionPS: {fileID: 4860942256891308952}
 --- !u!114 &8204583705506877368
 MonoBehaviour:

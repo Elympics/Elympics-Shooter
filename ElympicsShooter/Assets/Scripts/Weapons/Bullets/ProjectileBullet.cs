@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
+public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 {
 	[SerializeField] protected float speed = 5.0f;
 	[SerializeField] protected float timeToSelfDestroy = 5.0f;
@@ -16,9 +16,9 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 	protected new Rigidbody rigidbody = null;
 	protected new Collider collider = null;
 
-	protected ElympicsGameObject explosionAreaInstance = new ElympicsGameObject(null);
+	protected ElympicsBool readyToLaunchExplosion = new ElympicsBool(false);
+	protected ElympicsBool markedAsReadyToDestroy = new ElympicsBool(false);
 
-	private WeaponBulletPooler assignedPooler = null;
 	private GameObject owner = null;
 	private Coroutine deathTimerCoroutine = null;
 
@@ -28,22 +28,9 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 		collider = GetComponent<Collider>();
 	}
 
-	public void SetPooler(WeaponBulletPooler assignedPooler)
-	{
-		this.assignedPooler = assignedPooler;
-	}
-
 	public void SetOwner(GameObject owner)
 	{
 		this.owner = owner;
-	}
-
-	public void Initialize()
-	{
-		var explosionAreaInstance = ElympicsInstantiate(explosionAreaPrefab.gameObject.name, ElympicsPlayer.All);
-
-		explosionAreaInstance.transform.position = this.transform.position;
-		this.explosionAreaInstance.Value = explosionAreaInstance.GetComponent<ElympicsBehaviour>();
 	}
 
 	public void Launch(Vector3 direction)
@@ -68,8 +55,8 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 
 	private void DestroyProjectile()
 	{
-		assignedPooler.ReturnBullet(this);
 		deathTimerCoroutine = null;
+		markedAsReadyToDestroy.Value = true;
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -83,25 +70,23 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 
 	private void DetonateProjectile()
 	{
-		explosionAreaInstance.Value.transform.position = this.transform.position;
-		explosionAreaInstance.Value.GetComponent<ExplosionArea>().Detonate();
+		readyToLaunchExplosion.Value = true;
 	}
 
-	public virtual void OnTaken()
+	public void ElympicsUpdate()
 	{
-		rigidbody.isKinematic = false;
-		rigidbody.useGravity = true;
-
-		if (collider)
-			collider.enabled = true;
+		if (readyToLaunchExplosion)
+			LaunchExplosion();
+		if (markedAsReadyToDestroy)
+			ElympicsDestroy(this.gameObject);
 	}
 
-	public virtual void OnReturned()
+	private void LaunchExplosion()
 	{
-		rigidbody.isKinematic = true;
-		rigidbody.useGravity = false;
+		var explosionArea = ElympicsInstantiate(explosionAreaPrefab.gameObject.name, ElympicsPlayer.All);
+		explosionArea.transform.position = this.transform.position;
+		explosionArea.GetComponent<ExplosionArea>().Detonate();
 
-		if (collider)
-			collider.enabled = false;
+		readyToLaunchExplosion.Value = false;
 	}
 }
