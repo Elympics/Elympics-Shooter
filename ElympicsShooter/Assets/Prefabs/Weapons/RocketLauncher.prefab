@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  fireRate: 60
+  fireRate: 1
   bulletSpawnPoint: {fileID: 851411662769384532}
   bulletPrefab: {fileID: 7043128056353641736, guid: 17b56b5d362346447a871c456e788d52, type: 3}
   weaponBulletPooler: {fileID: 3835079663172034074}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpawnPosition: {x: 99999, y: 99999, z: 99999}
-  numberOfNecessaryBullets: 6
+  numberOfNecessaryBullets: 2
 --- !u!1 &7797543503229190934
 GameObject:
   m_ObjectHideFlags: 0

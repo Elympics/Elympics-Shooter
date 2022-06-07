@@ -16,6 +16,7 @@ public class ExplosionArea : ElympicsMonoBehaviour
 	{
 		DetectTargetsInExplosionRange();
 
+		Debug.Log("Particles play!");
 		explosionPS.Play();
 	}
 

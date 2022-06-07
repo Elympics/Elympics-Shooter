@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7537850768692574985}
   - component: {fileID: 7875569858094418477}
   - component: {fileID: 7043128056353641736}
+  - component: {fileID: 3863680755345955921}
   m_Layer: 0
   m_Name: TestRocketBullet
   m_TagString: Untagged
@@ -179,8 +180,8 @@ MonoBehaviour:
     synchronizationEnabled: 0
     tolerance: 0.01
   useGravityConfig:
-    synchronizationEnabled: 0
-    tolerance: 0
+    synchronizationEnabled: 1
+    tolerance: 0.01
 --- !u!114 &7043128056353641736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +197,22 @@ MonoBehaviour:
   speed: 50
   timeToSelfDestroy: 5
   explosionAreaPrefab: {fileID: 1847077561709327259, guid: 5b5b674421d187d4c8763c091b9d1ffd, type: 3}
+  projectileBulletSynchronizer: {fileID: 3863680755345955921}
+--- !u!114 &3863680755345955921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875569858094418467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7473956bae9ef41b8150785710ce0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 7875569858094418478}
+  collider: {fileID: 7537850768692574985}
+  RigidbodyIsKinematic:
+    currentValue: 0
+  ColliderEnabled:
+    currentValue: 0

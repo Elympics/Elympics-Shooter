@@ -11,22 +11,21 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 	[SerializeField] private int numberOfNecessaryBullets = 0;
 
 	private ElympicsArray<ElympicsGameObject> poolerBullets = null;
-	private ElympicsBool createBulletsRPC = new ElympicsBool(false);
 	private ElympicsInt currentAvailableBullet = new ElympicsInt(0);
 
 	private ProjectileBullet bulletPrefab = null;
 	private Weapon weapon = null;
 
+	private bool poolerObjectsCreated = false;
+
 	public void Initialize()
 	{
 		poolerBullets = new ElympicsArray<ElympicsGameObject>(numberOfNecessaryBullets, () => new ElympicsGameObject());
-
-		createBulletsRPC.Value = true;
 	}
 
 	public void ElympicsUpdate()
 	{
-		if (createBulletsRPC == true)
+		if (Elympics.IsServer && !poolerObjectsCreated)
 		{
 			CreateBullets();
 		}
@@ -34,22 +33,23 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 
 	private void CreateBullets()
 	{
+		int ownerId = weapon.Owner.GetComponent<PlayerData>().PlayerId;
+
 		for (int i = 0; i < poolerBullets.Values.Count; i++)
 		{
-			var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.All);
+			var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.FromIndex(ownerId));
 
 			var projectileBullet = createdBullet.GetComponent<ProjectileBullet>();
+			projectileBullet.assignedPlayerId.Value = ownerId;
 			projectileBullet.SetPooler(this);
 			projectileBullet.SetOwner(weapon.Owner);
 
 			createdBullet.transform.position = defaultSpawnPosition;
 
-			projectileBullet.Initialize();
-
 			poolerBullets.Values[i].Value = createdBullet.gameObject.GetComponent<ElympicsBehaviour>();
 		}
 
-		createBulletsRPC.Value = false;
+		poolerObjectsCreated = true;
 	}
 
 	public ProjectileBullet GetBullet()
