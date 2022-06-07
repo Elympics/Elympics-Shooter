@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1847077561709327261}
   - component: {fileID: 1847077561709327258}
   - component: {fileID: 1847077561709327259}
+  - component: {fileID: 8204583705506877368}
   m_Layer: 0
   m_Name: TestRocketExplosionArea
   m_TagString: Untagged
@@ -77,6 +78,27 @@ MonoBehaviour:
   explosionDamage: 10
   explosionRange: 2
   explosionPS: {fileID: 4860942256891308952}
+--- !u!114 &8204583705506877368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847077561709327256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b382d63b93bdf4bbeda8299ce4a906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPositionConfig:
+    synchronizationEnabled: 1
+    tolerance: 0.01
+  localScaleConfig:
+    synchronizationEnabled: 1
+    tolerance: 0.01
+  localRotationConfig:
+    synchronizationEnabled: 1
+    tolerance: 1
 --- !u!1001 &1847077561889952890
 PrefabInstance:
   m_ObjectHideFlags: 0

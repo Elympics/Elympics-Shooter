@@ -40,7 +40,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IPoolerObject
 
 	public void Initialize()
 	{
-		var explosionAreaInstance = ElympicsInstantiate(explosionAreaPrefab.gameObject.name, ElympicsPlayer.World);
+		var explosionAreaInstance = ElympicsInstantiate(explosionAreaPrefab.gameObject.name, ElympicsPlayer.All);
 
 		explosionAreaInstance.transform.position = this.transform.position;
 		this.explosionAreaInstance.Value = explosionAreaInstance.GetComponent<ElympicsBehaviour>();

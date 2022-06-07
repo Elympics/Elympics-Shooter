@@ -36,7 +36,7 @@ public class WeaponBulletPooler : ElympicsMonoBehaviour, IInitializable, IUpdata
 	{
 		for (int i = 0; i < poolerBullets.Values.Count; i++)
 		{
-			var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.World);
+			var createdBullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.All);
 
 			var projectileBullet = createdBullet.GetComponent<ProjectileBullet>();
 			projectileBullet.SetPooler(this);

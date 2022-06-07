@@ -14,14 +14,28 @@ public class ExplosionArea : ElympicsMonoBehaviour
 
 	public void Detonate()
 	{
+		DetectTargetsInExplosionRange();
+
+		explosionPS.Play();
+	}
+
+	private void DetectTargetsInExplosionRange()
+	{
 		Collider[] objectsInExplosionRange = Physics.OverlapSphere(this.transform.position, explosionRange);
 
 		foreach (Collider objectInExplosionRange in objectsInExplosionRange)
 		{
-			Debug.Log(objectInExplosionRange.gameObject.name + " got hit!");
+			TryToApplyDamageToTarget(objectInExplosionRange.transform.root.gameObject);
 		}
+	}
 
-		explosionPS.Play();
+	private void TryToApplyDamageToTarget(GameObject objectInExplosionRange)
+	{
+		if (objectInExplosionRange.TryGetComponent<StatsController>(out StatsController targetStatsController))
+		{
+			//TODO: Add damage modification depending on distance from explosion center
+			targetStatsController.ChangeHealth(-explosionDamage);
+		}
 	}
 
 	private void OnDrawGizmosSelected()
