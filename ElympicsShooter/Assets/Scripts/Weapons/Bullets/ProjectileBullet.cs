@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
+public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializable
 {
 	[Header("Parameters:")]
 	[SerializeField] protected float speed = 5.0f;
@@ -22,8 +22,27 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 	protected ElympicsBool readyToLaunchExplosion = new ElympicsBool(false);
 	protected ElympicsBool markedAsReadyToDestroy = new ElympicsBool(false);
 
+	protected ElympicsBool rigidbodyIsKinematic = new ElympicsBool(true);
+	protected ElympicsBool colliderEnabled = new ElympicsBool(false);
+
 	private ElympicsGameObject owner = new ElympicsGameObject();
 	private Coroutine lifetimeDeathTimerCoroutine = null;
+
+	public void Initialize()
+	{
+		rigidbodyIsKinematic.ValueChanged += UpdateRigidbodyIsKinematic;
+		colliderEnabled.ValueChanged += UpdateColliderEnabled;
+	}
+
+	private void UpdateColliderEnabled(bool lastValue, bool newValue)
+	{
+		collider.enabled = newValue;
+	}
+
+	private void UpdateRigidbodyIsKinematic(bool lastValue, bool newValue)
+	{
+		rigidbody.isKinematic = newValue;
+	}
 
 	public void SetOwner(ElympicsBehaviour owner)
 	{
@@ -32,6 +51,10 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 
 	public void Launch(Vector3 direction)
 	{
+		rigidbody.useGravity = true;
+		rigidbodyIsKinematic.Value = false;
+		colliderEnabled.Value = true;
+
 		ChangeBulletVelocity(direction);
 
 		if (Elympics.IsServer)
@@ -68,6 +91,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 		if (lifetimeDeathTimerCoroutine != null)
 			StopCoroutine(lifetimeDeathTimerCoroutine);
 
+		Debug.Log("Yo, dude, Ive been launched coz of this dude: " + collision.gameObject.name);
 		DetonateProjectile();
 
 		StartCoroutine(SelfDestoryTimer(timeToDestroyOnExplosion));
@@ -89,9 +113,9 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 	private void LaunchExplosion()
 	{
 		bulletMeshRoot.SetActive(false);
+		rigidbodyIsKinematic.Value = true;
 		rigidbody.useGravity = false;
-		rigidbody.isKinematic = true;
-		collider.enabled = false;
+		colliderEnabled.Value = false;
 
 		explosionArea.Detonate();
 
