@@ -1,13 +1,17 @@
 using Elympics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientPlayerProvider : ElympicsMonoBehaviour
+public class ClientPlayerProvider : ElympicsMonoBehaviour, IInitializable
 {
 	public static ClientPlayerProvider Instance = null;
 
 	public PlayerData ClientPlayer { get; private set; } = null;
+
+	public bool IsReady { get; private set; } = false;
+	public event Action IsReadyChanged = null;
 
 	private void Awake()
 	{
@@ -15,8 +19,13 @@ public class ClientPlayerProvider : ElympicsMonoBehaviour
 			ClientPlayerProvider.Instance = this;
 		else
 			Destroy(this);
+	}
 
+	public void Initialize()
+	{ 
 		FindClientPlayerInScene();
+		IsReady = true;
+		IsReadyChanged?.Invoke();
 	}
 
 	private void FindClientPlayerInScene()

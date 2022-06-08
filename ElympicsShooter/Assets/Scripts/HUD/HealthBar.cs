@@ -10,8 +10,17 @@ public class HealthBar : MonoBehaviour
 
 	private void Start()
 	{
-		var clientPlayerData = ClientPlayerProvider.Instance.ClientPlayer;
+		var clientPlayerProvider = ClientPlayerProvider.Instance;
 
+		if (clientPlayerProvider.IsReady)
+			SubscribeToStatsController();
+		else
+			clientPlayerProvider.IsReadyChanged += SubscribeToStatsController;
+	}
+
+	private void SubscribeToStatsController()
+	{
+		var clientPlayerData = ClientPlayerProvider.Instance.ClientPlayer;
 		clientPlayerData.StatsController.HealthValueChanged += UpdateHealthBarView;
 	}
 
