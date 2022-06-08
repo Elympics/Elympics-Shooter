@@ -3,25 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionArea : ElympicsMonoBehaviour, IUpdatable
+public class ExplosionArea : ElympicsMonoBehaviour
 {
 	[Header("Parameters:")]
 	[SerializeField] private float explosionDamage = 10.0f;
 	[SerializeField] private float explosionRange = 2.0f;
-	[SerializeField] private float timeToDestroy = 1.0f;
  
 	[Header("References:")]
 	[SerializeField] private ParticleSystem explosionPS = null;
-
-	private ElympicsBool markedAsReadyToDestroy = new ElympicsBool(false);
 
 	public void Detonate()
 	{
 		DetectTargetsInExplosionRange();
 
 		explosionPS.Play();
-
-		StartCoroutine(DeathTimer(timeToDestroy));
 	}
 
 	private void DetectTargetsInExplosionRange()
@@ -41,19 +36,6 @@ public class ExplosionArea : ElympicsMonoBehaviour, IUpdatable
 			//TODO: Add damage modification depending on distance from explosion center
 			targetStatsController.ChangeHealth(-explosionDamage);
 		}
-	}
-
-	private IEnumerator DeathTimer(float timeToDestroy)
-	{
-		yield return new WaitForSeconds(timeToDestroy);
-
-		markedAsReadyToDestroy.Value = true;
-	}
-
-	public void ElympicsUpdate()
-	{
-		if (markedAsReadyToDestroy)
-			ElympicsDestroy(this.gameObject);
 	}
 
 	private void OnDrawGizmosSelected()

@@ -6,31 +6,28 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 {
+	[Header("Parameters:")]
 	[SerializeField] protected float speed = 5.0f;
-	[SerializeField] protected float timeToSelfDestroy = 5.0f;
+	[SerializeField] protected float lifeTime = 5.0f;
+	[SerializeField] protected float timeToDestroyOnExplosion = 1.0f;
 
-	[SerializeField] private ExplosionArea explosionAreaPrefab = null;
+	[Header("References:")]
+	[SerializeField] private ExplosionArea explosionArea = null;
+	[SerializeField] private GameObject bulletMeshRoot = null;
+	[SerializeField] protected new Rigidbody rigidbody = null;
+	[SerializeField] protected new Collider collider = null;
 
-	public float TimeToSelfDestroy => timeToSelfDestroy;
-
-	protected new Rigidbody rigidbody = null;
-	protected new Collider collider = null;
+	public float LifeTime => lifeTime;
 
 	protected ElympicsBool readyToLaunchExplosion = new ElympicsBool(false);
 	protected ElympicsBool markedAsReadyToDestroy = new ElympicsBool(false);
 
-	private GameObject owner = null;
-	private Coroutine deathTimerCoroutine = null;
+	private ElympicsGameObject owner = new ElympicsGameObject();
+	private Coroutine lifetimeDeathTimerCoroutine = null;
 
-	private void Awake()
+	public void SetOwner(ElympicsBehaviour owner)
 	{
-		rigidbody = GetComponent<Rigidbody>();
-		collider = GetComponent<Collider>();
-	}
-
-	public void SetOwner(GameObject owner)
-	{
-		this.owner = owner;
+		this.owner.Value = owner;
 	}
 
 	public void Launch(Vector3 direction)
@@ -38,7 +35,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 		ChangeBulletVelocity(direction);
 
 		if (Elympics.IsServer)
-			deathTimerCoroutine = StartCoroutine(DeathTimer());
+			lifetimeDeathTimerCoroutine = StartCoroutine(SelfDestoryTimer(lifeTime));
 	}
 
 	private void ChangeBulletVelocity(Vector3 direction)
@@ -46,26 +43,34 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 		rigidbody.velocity = direction * speed;
 	}
 
-	private IEnumerator DeathTimer()
+	private IEnumerator SelfDestoryTimer(float time)
 	{
-		yield return new WaitForSeconds(timeToSelfDestroy);
+		yield return new WaitForSeconds(time);
 
 		DestroyProjectile();
 	}
 
 	private void DestroyProjectile()
 	{
-		deathTimerCoroutine = null;
+		lifetimeDeathTimerCoroutine = null;
 		markedAsReadyToDestroy.Value = true;
 	}
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.transform.root.gameObject == owner)
+		//TODO: Dirty fix when object is destroyed
+		if (owner.Value == null)
 			return;
 
+		if (collision.transform.root.gameObject == owner.Value.gameObject)
+			return;
+
+		if (lifetimeDeathTimerCoroutine != null)
+			StopCoroutine(lifetimeDeathTimerCoroutine);
+
 		DetonateProjectile();
-		DestroyProjectile();
+
+		StartCoroutine(SelfDestoryTimer(timeToDestroyOnExplosion));
 	}
 
 	private void DetonateProjectile()
@@ -83,9 +88,12 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable
 
 	private void LaunchExplosion()
 	{
-		var explosionArea = ElympicsInstantiate(explosionAreaPrefab.gameObject.name, ElympicsPlayer.All);
-		explosionArea.transform.position = this.transform.position;
-		explosionArea.GetComponent<ExplosionArea>().Detonate();
+		bulletMeshRoot.SetActive(false);
+		rigidbody.useGravity = false;
+		rigidbody.isKinematic = true;
+		collider.enabled = false;
+
+		explosionArea.Detonate();
 
 		readyToLaunchExplosion.Value = false;
 	}
