@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6765057966925682971, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: predictableFor.playerIndex
-      value: 1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6765057966925682972, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_RootOrder
@@ -78,6 +78,10 @@ PrefabInstance:
     - target: {fileID: 8687269955033791109, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687269955033791109, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: predictableFor.playerIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8914176383838103783, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: isDefaultCamera

@@ -4,35 +4,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientPlayerProvider : ElympicsMonoBehaviour, IInitializable
+public class PlayersProvider : ElympicsMonoBehaviour, IInitializable
 {
-	public static ClientPlayerProvider Instance = null;
+	public static PlayersProvider Instance = null;
 
 	public PlayerData ClientPlayer { get; private set; } = null;
+	public PlayerData[] AllPlayersInScene { get; private set; } = null;
 
 	public bool IsReady { get; private set; } = false;
 	public event Action IsReadyChanged = null;
 
 	private void Awake()
 	{
-		if (ClientPlayerProvider.Instance == null)
-			ClientPlayerProvider.Instance = this;
+		if (PlayersProvider.Instance == null)
+			PlayersProvider.Instance = this;
 		else
 			Destroy(this);
 	}
 
 	public void Initialize()
-	{ 
+	{
+		FindAllPlayersInScene();
 		FindClientPlayerInScene();
 		IsReady = true;
 		IsReadyChanged?.Invoke();
 	}
 
+	private void FindAllPlayersInScene()
+	{
+		this.AllPlayersInScene = FindObjectsOfType<PlayerData>();
+	}
+
 	private void FindClientPlayerInScene()
 	{
-		var playersInScene = FindObjectsOfType<PlayerData>();
-
-		foreach (PlayerData player in playersInScene)
+		foreach (PlayerData player in AllPlayersInScene)
 		{
 			if ((int)Elympics.Player == player.PlayerId)
 			{
@@ -43,6 +48,6 @@ public class ClientPlayerProvider : ElympicsMonoBehaviour, IInitializable
 
 		//Fix for server side.
 		//TODO: Disable HUD on server
-		ClientPlayer = playersInScene[0];
+		ClientPlayer = AllPlayersInScene[0];
 	}
 }

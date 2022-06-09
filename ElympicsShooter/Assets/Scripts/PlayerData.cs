@@ -9,7 +9,9 @@ public class PlayerData : MonoBehaviour
 
 	[Header("References:")]
 	[SerializeField] private StatsController statsController = null;
+	[SerializeField] private DeathController deathController = null;
 
 	public int PlayerId => playerId;
 	public StatsController StatsController => statsController;
+	public DeathController DeathController => deathController;
 }

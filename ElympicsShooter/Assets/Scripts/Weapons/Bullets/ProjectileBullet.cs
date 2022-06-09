@@ -28,6 +28,8 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 	private ElympicsGameObject owner = new ElympicsGameObject();
 	private Coroutine lifetimeDeathTimerCoroutine = null;
 
+	private bool bulletExploded = false;
+
 	public void Initialize()
 	{
 		rigidbodyIsKinematic.ValueChanged += UpdateRigidbodyIsKinematic;
@@ -91,7 +93,6 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 		if (lifetimeDeathTimerCoroutine != null)
 			StopCoroutine(lifetimeDeathTimerCoroutine);
 
-		Debug.Log("Yo, dude, Ive been launched coz of this dude: " + collision.gameObject.name);
 		DetonateProjectile();
 
 		StartCoroutine(SelfDestoryTimer(timeToDestroyOnExplosion));
@@ -104,9 +105,9 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 
 	public void ElympicsUpdate()
 	{
-		if (readyToLaunchExplosion)
+		if (readyToLaunchExplosion.Value && !bulletExploded)
 			LaunchExplosion();
-		if (markedAsReadyToDestroy)
+		if (markedAsReadyToDestroy.Value)
 			ElympicsDestroy(this.gameObject);
 	}
 
@@ -119,6 +120,6 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 
 		explosionArea.Detonate();
 
-		readyToLaunchExplosion.Value = false;
+		bulletExploded = true;
 	}
 }

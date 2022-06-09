@@ -15,6 +15,8 @@ public class RocketLauncher : Weapon
 
 	private ElympicsGameObject prespawnedBullet = new ElympicsGameObject();
 
+	private int index = 0;
+
 	protected override void ProcessBulletSpawn()
 	{
 		launchBullet.Value = true;
@@ -36,10 +38,12 @@ public class RocketLauncher : Weapon
 			prespawnedBullet.Value.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
 
 			launchBullet.Value = false;
-			prespawnedBullet.Value = null;
 
 			if (Elympics.IsServer)
+			{
+				prespawnedBullet.Value = null;
 				PrespawnBullet();
+			}
 		}
 	}
 
@@ -49,5 +53,8 @@ public class RocketLauncher : Weapon
 		bullet.GetComponent<ProjectileBullet>().SetOwner(Owner.gameObject.transform.root.gameObject.GetComponent<ElympicsBehaviour>());
 		bullet.transform.position = offscreenPrespawnPosition;
 		prespawnedBullet.Value = bullet.GetComponent<ElympicsBehaviour>();
+
+		bullet.gameObject.name = index.ToString();
+		index++;
 	}
 }
