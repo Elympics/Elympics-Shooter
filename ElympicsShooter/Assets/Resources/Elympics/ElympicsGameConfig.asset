@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameName: ElympicsShooter
   gameId: eae33548-47fd-4bfb-bf15-c516056818e0
-  gameVersion: 3.1.1
+  gameVersion: 3.1.2
   players: 2
   gameplayScene: Assets/Scenes/ShooterDemo.unity
   gameplaySceneAsset: {fileID: 102900000, guid: 4017d0c265479cf42b58ee5ffb79b3bc, type: 3}
@@ -28,7 +28,7 @@ MonoBehaviour:
   maxAllowedLagInTicks: 2
   prediction: 1
   predictionLimitInTicks: 2
-  mode: 2
+  mode: 1
   halfRemoteMode: 0
   useWebInHalfRemote: 0
   ipForHalfRemoteMode: 127.0.0.1

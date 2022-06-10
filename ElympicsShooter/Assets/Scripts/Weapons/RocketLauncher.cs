@@ -17,7 +17,7 @@ public class RocketLauncher : Weapon
 
 	private int index = 0;
 
-	protected override void ProcessBulletSpawn()
+	protected override void ProcessWeaponAction()
 	{
 		launchBullet.Value = true;
 	}

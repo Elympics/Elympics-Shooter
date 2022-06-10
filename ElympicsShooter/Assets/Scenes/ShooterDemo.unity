@@ -2483,6 +2483,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 978054953920868353, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161296104104690033, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 5179770150666763226, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
       value: 5

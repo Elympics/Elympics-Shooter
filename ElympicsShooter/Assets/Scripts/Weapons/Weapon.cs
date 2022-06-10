@@ -11,7 +11,7 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 	protected float timeBetweenShoots = 0.0f;
 	public float TimeBetweenShoots => timeBetweenShoots;
 
-	private bool IsReadyToShoot => currentTimeBetweenShoots >= timeBetweenShoots;
+	private bool IsReady => currentTimeBetweenShoots >= timeBetweenShoots;
 
 	public GameObject Owner => this.transform.root.gameObject;
 
@@ -22,29 +22,32 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 
 	public void CalculateTimeBetweenShoots()
 	{
-		timeBetweenShoots = 60.0f / fireRate;
+		if (fireRate > 0)
+			timeBetweenShoots = 60.0f / fireRate;
+		else
+			timeBetweenShoots = 0.0f;
 	}
 
 	public void ExecutePrimaryAction()
 	{
-		Shot();
+		ExecuteWeaponActionIfReady();
 	}
 
-	private void Shot()
+	private void ExecuteWeaponActionIfReady()
 	{
-		if (IsReadyToShoot)
+		if (IsReady)
 		{
-			ProcessBulletSpawn();
+			ProcessWeaponAction();
 
 			currentTimeBetweenShoots.Value = 0.0f;
 		}
 	}
 
-	protected abstract void ProcessBulletSpawn();
+	protected abstract void ProcessWeaponAction();
 
 	public virtual void ElympicsUpdate()
 	{
-		if (!IsReadyToShoot)
+		if (!IsReady)
 		{
 			currentTimeBetweenShoots.Value += Elympics.TickDuration;
 		}
