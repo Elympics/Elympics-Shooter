@@ -7,54 +7,36 @@ public class RocketLauncher : Weapon
 {
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private ProjectileBullet bulletPrefab = null;
-	[SerializeField] private Vector3 offscreenPrespawnPosition = Vector3.one * 9999.9f;
 
 	public ProjectileBullet BulletPrefab => bulletPrefab;
 
-	private ElympicsBool launchBullet = new ElympicsBool(false);
-
-	private ElympicsGameObject prespawnedBullet = new ElympicsGameObject();
-
-	private int index = 0;
+	private bool launchBullet = false;
 
 	protected override void ProcessWeaponAction()
 	{
-		launchBullet.Value = true;
+		launchBullet = true;
 	}
 
 	public override void ElympicsUpdate()
 	{
 		base.ElympicsUpdate();
 
-		//Prespawning bullet for avoiding bullet teleportation (missing tick when it's spawned and launched in the same frame)
-		if (prespawnedBullet.Value == null && Elympics.IsServer)
-		{
-			PrespawnBullet();
-		}
-
 		if (launchBullet)
 		{
-			prespawnedBullet.Value.transform.position = bulletSpawnPoint.position;
-			prespawnedBullet.Value.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
+			var bullet = CreateBullet();
 
-			launchBullet.Value = false;
+			bullet.transform.position = bulletSpawnPoint.position;
+			bullet.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
 
-			if (Elympics.IsServer)
-			{
-				prespawnedBullet.Value = null;
-				PrespawnBullet();
-			}
+			launchBullet = false;
 		}
 	}
 
-	private void PrespawnBullet()
+	private GameObject CreateBullet()
 	{
 		var bullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.FromIndex(Owner.GetComponent<PlayerData>().PlayerId));
 		bullet.GetComponent<ProjectileBullet>().SetOwner(Owner.gameObject.transform.root.gameObject.GetComponent<ElympicsBehaviour>());
-		bullet.transform.position = offscreenPrespawnPosition;
-		prespawnedBullet.Value = bullet.GetComponent<ElympicsBehaviour>();
 
-		bullet.gameObject.name = index.ToString();
-		index++;
+		return bullet;
 	}
 }
