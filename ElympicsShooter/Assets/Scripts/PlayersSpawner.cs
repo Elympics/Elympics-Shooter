@@ -37,9 +37,15 @@ public class PlayersSpawner : ElympicsMonoBehaviour, IInitializable
 
 	private void InitialSpawnPlayers()
 	{
+		StartCoroutine(SpawnOnePlayerPerFrame());
+	}
+
+	private IEnumerator SpawnOnePlayerPerFrame()
+	{
 		foreach (PlayerData player in playersProvider.AllPlayersInScene)
 		{
 			SpawnPlayer(player);
+			yield return new WaitForEndOfFrame();
 		}
 	}
 
