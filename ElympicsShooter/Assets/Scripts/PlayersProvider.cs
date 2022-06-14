@@ -6,21 +6,11 @@ using UnityEngine;
 
 public class PlayersProvider : ElympicsMonoBehaviour, IInitializable
 {
-	public static PlayersProvider Instance = null;
-
 	public PlayerData ClientPlayer { get; private set; } = null;
 	public PlayerData[] AllPlayersInScene { get; private set; } = null;
 
 	public bool IsReady { get; private set; } = false;
 	public event Action IsReadyChanged = null;
-
-	private void Awake()
-	{
-		if (PlayersProvider.Instance == null)
-			PlayersProvider.Instance = this;
-		else
-			Destroy(this);
-	}
 
 	public void Initialize()
 	{

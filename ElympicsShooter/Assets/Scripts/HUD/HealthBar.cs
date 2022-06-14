@@ -6,21 +6,20 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private Slider healthSlider = null;
 
 	private void Start()
 	{
-		var clientPlayerProvider = PlayersProvider.Instance;
-
-		if (clientPlayerProvider.IsReady)
+		if (playersProvider.IsReady)
 			SubscribeToStatsController();
 		else
-			clientPlayerProvider.IsReadyChanged += SubscribeToStatsController;
+			playersProvider.IsReadyChanged += SubscribeToStatsController;
 	}
 
 	private void SubscribeToStatsController()
 	{
-		var clientPlayerData = PlayersProvider.Instance.ClientPlayer;
+		var clientPlayerData = playersProvider.ClientPlayer;
 		clientPlayerData.StatsController.HealthValueChanged += UpdateHealthBarView;
 	}
 

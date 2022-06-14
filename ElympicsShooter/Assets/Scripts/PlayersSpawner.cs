@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayersSpawner : ElympicsMonoBehaviour
+public class PlayersSpawner : ElympicsMonoBehaviour, IInitializable
 {
+	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private Transform[] spawnPoints = null;
 
 	private System.Random random = null;
@@ -21,14 +22,12 @@ public class PlayersSpawner : ElympicsMonoBehaviour
 			Destroy(this);
 	}
 
-	public void Start()
+	public void Initialize()
 	{
 		if (!Elympics.IsServer)
 			return;
 
 		random = new System.Random();
-
-		var playersProvider = PlayersProvider.Instance;
 
 		if (playersProvider.IsReady)
 			InitialSpawnPlayers();
@@ -38,7 +37,7 @@ public class PlayersSpawner : ElympicsMonoBehaviour
 
 	private void InitialSpawnPlayers()
 	{
-		foreach (PlayerData player in PlayersProvider.Instance.AllPlayersInScene)
+		foreach (PlayerData player in playersProvider.AllPlayersInScene)
 		{
 			SpawnPlayer(player);
 		}

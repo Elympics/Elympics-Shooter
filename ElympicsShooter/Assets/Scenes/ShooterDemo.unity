@@ -942,6 +942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8810c2c00e6118b43a982e406650a5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playersProvider: {fileID: 1639872750}
   spawnPoints:
   - {fileID: 1259021224}
   - {fileID: 887645821}
@@ -1046,6 +1047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b54f19ce5e7d8a44bc0cea9e3edf725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playersProvider: {fileID: 1639872750}
   healthSlider: {fileID: 2142020640}
 --- !u!1 &1086547142
 GameObject:
@@ -1442,7 +1444,7 @@ GameObject:
   - component: {fileID: 1639872748}
   - component: {fileID: 1639872750}
   m_Layer: 0
-  m_Name: ClientPlayerProvider
+  m_Name: PlayersProvider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1703,6 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0c0680164db954bb32b672643a5118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playersProvider: {fileID: 1639872750}
   canvasGroup: {fileID: 1721660001}
   deathTimerText: {fileID: 286065845}
 --- !u!1 &1829924794

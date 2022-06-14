@@ -6,22 +6,21 @@ using UnityEngine;
 
 public class DeathScreen : MonoBehaviour
 {
+	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private CanvasGroup canvasGroup = null;
 	[SerializeField] private TextMeshProUGUI deathTimerText = null;
 
 	private void Start()
 	{
-		var clientPlayerProvider = PlayersProvider.Instance;
-
-		if (clientPlayerProvider.IsReady)
+		if (playersProvider.IsReady)
 			SubscribeToDeathController();
 		else
-			clientPlayerProvider.IsReadyChanged += SubscribeToDeathController;
+			playersProvider.IsReadyChanged += SubscribeToDeathController;
 	}
 
 	private void SubscribeToDeathController()
 	{
-		var clientPlayerData = PlayersProvider.Instance.ClientPlayer;
+		var clientPlayerData = playersProvider.ClientPlayer;
 		clientPlayerData.DeathController.CurrentDeathTime.ValueChanged += UpdateDeathTimerView;
 		clientPlayerData.DeathController.IsDead.ValueChanged += UpdateDeathScreenView;
 	}

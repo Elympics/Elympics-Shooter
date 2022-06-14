@@ -622,6 +622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RailGun
       objectReference: {fileID: 0}
+    - target: {fileID: 2160514484414115409, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2477820221668970506, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: camera
       value: 
@@ -676,11 +680,11 @@ PrefabInstance:
       objectReference: {fileID: 3591813251496170235}
     - target: {fileID: 7406363108666867573, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: networkId
-      value: 44
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8883296847118093829, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: networkId
-      value: 43
+      value: 46
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
