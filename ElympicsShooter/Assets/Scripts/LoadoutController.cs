@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class LoadoutController : ElympicsMonoBehaviour, IInitializable
 {
+	[Header("References:")]
+	[SerializeField] private DeathController deathController = null;
 	[SerializeField] private Weapon[] availableWeapons = null;
 
 	private ElympicsInt currentEquipedWeaponIndex = new ElympicsInt(0);
@@ -13,6 +15,9 @@ public class LoadoutController : ElympicsMonoBehaviour, IInitializable
 
 	public void ProcessWeaponActions(bool weaponPrimaryAction)
 	{
+		if (deathController.IsDead)
+			return;
+
 		if (weaponPrimaryAction)
 			ProcessWeaponPrimaryAction();
 	}

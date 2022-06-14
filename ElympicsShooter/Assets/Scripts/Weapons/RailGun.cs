@@ -23,7 +23,6 @@ public class RailGun : Weapon
 		if (isLoadingToShot)
 			return;
 
-		Debug.Log("Shooting initialized");
 		currentLoadingTime.Value = 0.0f;
 		isLoadingToShot.Value = true;
 	}
@@ -45,10 +44,9 @@ public class RailGun : Weapon
 
 	private void ProcessRayShot()
 	{
-		Debug.Log("Ray shot");
 		RaycastHit hit;
 
-		if (Physics.Raycast(camera.transform.position + camera.transform.forward, camera.transform.forward, out hit, Mathf.Infinity))
+		if (Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, Mathf.Infinity))
 		{
 			if (hit.transform.TryGetComponent<StatsController>(out StatsController statsController))
 			{

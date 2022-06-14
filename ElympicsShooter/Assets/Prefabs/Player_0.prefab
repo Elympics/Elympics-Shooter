@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02680de10498a74dab0200045aaf562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathController: {fileID: 978363736352741455}
   movementSpeed: 10
   acceleration: 80
   jumpForce: 1000
@@ -382,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a94df72acd4e184cad3fc73128ccf30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathController: {fileID: 978363736352741455}
   verticalRotationTarget: {fileID: 2752692582429041278}
   horizontalRotationTarget: {fileID: 6765057966925682972}
 --- !u!114 &6940754338454159126
@@ -410,9 +412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b449c854b49f19c43aec99f0d3ad43da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathController: {fileID: 978363736352741455}
   availableWeapons:
-  - {fileID: 8683656521040245946}
   - {fileID: 4548380204345389350}
+  - {fileID: 8683656521040245946}
 --- !u!114 &8914176383838103783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 456089836817701551, guid: 2db424a0bb05acf45a59d09564ac243b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4948105342843277331, guid: 2db424a0bb05acf45a59d09564ac243b, type: 3}
       propertyPath: m_RootOrder
@@ -624,7 +627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2160514484414115409, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2477820221668970506, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: camera
@@ -680,11 +683,11 @@ PrefabInstance:
       objectReference: {fileID: 3591813251496170235}
     - target: {fileID: 7406363108666867573, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: networkId
-      value: 45
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 8883296847118093829, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: networkId
-      value: 46
+      value: 48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}

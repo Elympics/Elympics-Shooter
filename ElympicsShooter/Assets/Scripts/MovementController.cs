@@ -7,6 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class MovementController : ElympicsMonoBehaviour
 {
+	[Header("References:")]
+	[SerializeField] private DeathController deathController = null;
+
 	[Header("Parameters:")]
 	[SerializeField] private float movementSpeed = 0.0f;
 	[SerializeField] private float acceleration = 0.0f;
@@ -23,6 +26,9 @@ public class MovementController : ElympicsMonoBehaviour
 
 	public void ProcessMovement(float forwardMovementValue, float rightMovementValue, bool jump)
 	{
+		if (deathController.IsDead)
+			return;
+
 		Vector3 inputVector = new Vector3(forwardMovementValue, 0, rightMovementValue);
 		Vector3 movementDirection = inputVector != Vector3.zero ? this.transform.TransformDirection(inputVector.normalized) : Vector3.zero;
 
