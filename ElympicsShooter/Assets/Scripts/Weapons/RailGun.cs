@@ -33,12 +33,10 @@ public class RailGun : Weapon
 
 		if (isLoadingToShot)
 		{
-			currentLoadingTime.Value += Elympics.TickDuration;
+			ChangeCurrentLoadingTime(currentLoadingTime.Value += Elympics.TickDuration);
 
 			if (currentLoadingTime >= loadingTime)
 				ProcessRayShot();
-
-			LoadingTimeChanged?.Invoke(currentLoadingTime, loadingTime);
 		}
 	}
 
@@ -56,7 +54,23 @@ public class RailGun : Weapon
 
 		WeaponFired?.Invoke(hit);
 
-		currentLoadingTime.Value = 0.0f;
+		ChangeCurrentLoadingTime(0.0f);
 		isLoadingToShot.Value = false;
+	}
+
+	public override void SetIsActive(bool isActive)
+	{
+		base.SetIsActive(isActive);
+
+		if (!isActive)
+			isLoadingToShot.Value = false;
+
+		ChangeCurrentLoadingTime(0.0f);
+	}
+
+	private void ChangeCurrentLoadingTime(float newCurrentLoadingTime)
+	{
+		currentLoadingTime.Value = newCurrentLoadingTime;
+		LoadingTimeChanged?.Invoke(currentLoadingTime, loadingTime);
 	}
 }

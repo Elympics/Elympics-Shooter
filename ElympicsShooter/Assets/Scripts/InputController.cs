@@ -43,6 +43,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		//action buttons
 		inputWriter.Write(inputProvider.Jump);
 		inputWriter.Write(inputProvider.WeaponPrimaryAction);
+		inputWriter.Write(inputProvider.WeaponSlot);
 	}
 
 	public void ApplyInput(ElympicsPlayer player, IInputReader inputDeserializer)
@@ -56,6 +57,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 
 		inputDeserializer.Read(out bool jump);
 		inputDeserializer.Read(out bool weaponPrimaryAction);
+		inputDeserializer.Read(out int weaponSlot);
 
 		if (playerData.PlayerId != (int)player)
 			return;
@@ -64,7 +66,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 
 		ProcessMouse(Quaternion.Euler(new Vector3(xRotation, yRotation, zRotation)));
 
-		ProcessLoadoutActions(weaponPrimaryAction);
+		ProcessLoadoutActions(weaponPrimaryAction, weaponSlot);
 	}
 
 	private void ProcessMouse(Quaternion mouseRotation)
@@ -72,9 +74,9 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		viewController.ProcessView(mouseRotation);
 	}
 
-	private void ProcessLoadoutActions(bool weaponPrimaryAction)
+	private void ProcessLoadoutActions(bool weaponPrimaryAction, int weaponSlot)
 	{
-		loadoutController.ProcessWeaponActions(weaponPrimaryAction);
+		loadoutController.ProcessLoadoutActions(weaponPrimaryAction, weaponSlot);
 	}
 
 	private void ProcessMovement(float forwardMovement, float rightMovement, bool jump)

@@ -18,6 +18,7 @@ public class InputProvider : MonoBehaviour
 
 	public bool Jump { get; private set; }
 	public bool WeaponPrimaryAction { get; private set; }
+	public int WeaponSlot { get; private set; }
 
 	private void Update()
 	{
@@ -31,6 +32,8 @@ public class InputProvider : MonoBehaviour
 
 		Jump = Input.GetButton("Jump");
 		WeaponPrimaryAction = Input.GetButton("Fire1");
+		WeaponSlot = Input.GetKey(KeyCode.Alpha1) ? 0 :
+			Input.GetKey(KeyCode.Alpha2) ? 1 : -1;
 	}
 
 	private Vector3 FixTooLargeMouseAngles(Vector3 mouseAngles)

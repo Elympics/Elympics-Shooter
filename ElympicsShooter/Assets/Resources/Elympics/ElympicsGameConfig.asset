@@ -24,10 +24,10 @@ MonoBehaviour:
   connectOnGameplaySceneLoad: 1
   ticksPerSecond: 50
   snapshotSendingPeriodInTicks: 1
-  inputLagTicks: 1
-  maxAllowedLagInTicks: 2
+  inputLagTicks: 3
+  maxAllowedLagInTicks: 25
   prediction: 1
-  predictionLimitInTicks: 2
+  predictionLimitInTicks: 25
   mode: 1
   halfRemoteMode: 0
   useWebInHalfRemote: 0
