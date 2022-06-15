@@ -24,11 +24,11 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 
 	protected ElympicsBool rigidbodyIsKinematic = new ElympicsBool(true);
 	protected ElympicsBool colliderEnabled = new ElympicsBool(false);
+	protected ElympicsBool bulletExploded = new ElympicsBool(false);
 
 	private ElympicsGameObject owner = new ElympicsGameObject();
-	private Coroutine lifetimeDeathTimerCoroutine = null;
+	private ElympicsFloat deathTimer = new ElympicsFloat(0.0f);
 
-	private bool bulletExploded = false;
 
 	public void Initialize()
 	{
@@ -58,9 +58,6 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 		colliderEnabled.Value = true;
 
 		ChangeBulletVelocity(direction);
-
-		if (Elympics.IsServer)
-			lifetimeDeathTimerCoroutine = StartCoroutine(SelfDestoryTimer(lifeTime));
 	}
 
 	private void ChangeBulletVelocity(Vector3 direction)
@@ -77,7 +74,6 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 
 	private void DestroyProjectile()
 	{
-		lifetimeDeathTimerCoroutine = null;
 		markedAsReadyToDestroy.Value = true;
 	}
 
@@ -90,12 +86,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 		if (collision.transform.root.gameObject == owner.Value.gameObject)
 			return;
 
-		if (lifetimeDeathTimerCoroutine != null)
-			StopCoroutine(lifetimeDeathTimerCoroutine);
-
 		DetonateProjectile();
-
-		StartCoroutine(SelfDestoryTimer(timeToDestroyOnExplosion));
 	}
 
 	private void DetonateProjectile()
@@ -109,6 +100,14 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 			LaunchExplosion();
 		if (markedAsReadyToDestroy.Value)
 			ElympicsDestroy(this.gameObject);
+
+		deathTimer.Value += Elympics.TickDuration;
+
+		if ((!bulletExploded && deathTimer >= lifeTime)
+			|| (bulletExploded && deathTimer >= timeToDestroyOnExplosion))
+		{
+			DestroyProjectile();
+		}
 	}
 
 	private void LaunchExplosion()
@@ -120,6 +119,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 
 		explosionArea.Detonate();
 
-		bulletExploded = true;
+		bulletExploded.Value = true;
+		deathTimer.Value = 0.0f;
 	}
 }
