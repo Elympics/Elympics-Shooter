@@ -14,6 +14,9 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 	[SerializeField] private LineRenderer trailRendererPrefab = null;
 	[SerializeField] private new Camera camera = null;
 
+	[Header("Parameters:")]
+	[SerializeField] private float trailLifetime = 0.5f;
+
 	private ElympicsArray<ElympicsVector3> railRenderPoints = new ElympicsArray<ElympicsVector3>(new ElympicsVector3[] { new ElympicsVector3(), new ElympicsVector3()});
 
 	private Coroutine trailDeathTimerCoroutine = null;
@@ -76,7 +79,7 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 
 	private IEnumerator TrailDeathTimer()
 	{
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(trailLifetime);
 
 		trailRenderer.enabled = false;
 	}
