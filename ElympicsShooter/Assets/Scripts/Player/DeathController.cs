@@ -13,6 +13,7 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 	public ElympicsFloat CurrentDeathTime { get; private set; } = new ElympicsFloat(0.0f);
 
 	public event Action PlayerRespawned = null;
+	public event Action<int, int> HasBeenKilled = null;
 
 
 	private PlayerData playerData = null;
@@ -22,10 +23,12 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 		playerData = GetComponent<PlayerData>();
 	}
 
-	public void ProcessPlayersDeath()
+	public void ProcessPlayersDeath(int damageOwner)
 	{
 		CurrentDeathTime.Value = deathTime;
 		IsDead.Value = true;
+
+		HasBeenKilled?.Invoke((int)PredictableFor, damageOwner);
 	}
 
 	public void ElympicsUpdate()

@@ -5068,6 +5068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestRocketExplosionArea
       objectReference: {fileID: 0}
+    - target: {fileID: 1847077561709327259, guid: 5b5b674421d187d4c8763c091b9d1ffd, type: 3}
+      propertyPath: bulletOwner
+      value: 
+      objectReference: {fileID: 7043128056353641736}
     - target: {fileID: 1847077561709327261, guid: 5b5b674421d187d4c8763c091b9d1ffd, type: 3}
       propertyPath: m_RootOrder
       value: 0

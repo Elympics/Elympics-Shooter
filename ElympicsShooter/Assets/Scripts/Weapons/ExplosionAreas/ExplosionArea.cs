@@ -11,6 +11,7 @@ public class ExplosionArea : ElympicsMonoBehaviour
  
 	[Header("References:")]
 	[SerializeField] private ParticleSystem explosionPS = null;
+	[SerializeField] private ElympicsMonoBehaviour bulletOwner = null;
 
 	public void Detonate()
 	{
@@ -34,7 +35,7 @@ public class ExplosionArea : ElympicsMonoBehaviour
 		if (objectInExplosionRange.TryGetComponent<StatsController>(out StatsController targetStatsController))
 		{
 			//TODO: Add damage modification depending on distance from explosion center
-			targetStatsController.ChangeHealth(-explosionDamage);
+			targetStatsController.ChangeHealth(-explosionDamage, (int)bulletOwner.PredictableFor);
 		}
 	}
 

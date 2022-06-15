@@ -48,7 +48,7 @@ public class RailGun : Weapon
 		{
 			if (hit.transform.TryGetComponent<StatsController>(out StatsController statsController))
 			{
-				statsController.ChangeHealth(-damage);
+				statsController.ChangeHealth(-damage, (int)PredictableFor);
 			}
 		}
 

@@ -10,6 +10,7 @@ public class Scoreboard : MonoBehaviour
 	[SerializeField] private Transform cardsContainer = null;
 	[SerializeField] private CanvasGroup canvasGroup = null;
 	[SerializeField] private PlayersProvider playersProvider = null;
+	[SerializeField] private PlayerScoresManager playerScoresManager = null;
 
 	private void Awake()
 	{
@@ -26,7 +27,10 @@ public class Scoreboard : MonoBehaviour
 			hudController.ShowScoreboardValueChanged += SetScoreboardDisplayStatus;
 		}
 
-		CreatePlayerCars();
+		if (playerScoresManager.IsReady)
+			CreatePlayerCards();
+		else
+			playerScoresManager.IsReadyChanged += CreatePlayerCards;
 	}
 
 	private void SetScoreboardDisplayStatus(bool showScoreboard)
@@ -34,12 +38,12 @@ public class Scoreboard : MonoBehaviour
 		canvasGroup.alpha = showScoreboard ? 1.0f: 0.0f;
 	}
 
-	private void CreatePlayerCars()
+	private void CreatePlayerCards()
 	{
 		foreach (PlayerData playerData in playersProvider.AllPlayersInScene)
 		{
 			var createdCard = Instantiate(scoreboardPlayerCardPrefab, cardsContainer);
-			createdCard.Initialize(playerData);
+			createdCard.Initialize(playerData, playerScoresManager.GetScoreForPlayer(playerData.PlayerId));
 		}
 	}
 }
