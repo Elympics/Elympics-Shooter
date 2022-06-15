@@ -8,8 +8,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 250967938, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: nickname
+      value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 250967938, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: playerId
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 250967938, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: themeColor.b
+      value: 0.8862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 250967938, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: themeColor.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 250967938, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: themeColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 978054953920868353, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161296104104690033, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 1161296104104690033, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: predictableFor.playerIndex

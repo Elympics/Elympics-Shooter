@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 6232224650815086707}
   - component: {fileID: 8914176383838103783}
   - component: {fileID: 978363736352741455}
+  - component: {fileID: 4946741753114905793}
   m_Layer: 0
   m_Name: Player_0
   m_TagString: Untagged
@@ -320,6 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
+  nickname: Player 0
+  themeColor: {r: 0.42352945, g: 0.6745098, b: 1, a: 1}
   statsController: {fileID: 6940754338454159126}
   deathController: {fileID: 978363736352741455}
 --- !u!114 &6427017382001325481
@@ -353,6 +356,7 @@ MonoBehaviour:
   movementController: {fileID: 8374349575418976621}
   viewController: {fileID: 60942334666882023}
   loadoutController: {fileID: 6232224650815086707}
+  hudController: {fileID: 4946741753114905793}
   playerData: {fileID: 250967938}
 --- !u!114 &8374349575418976621
 MonoBehaviour:
@@ -441,6 +445,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTime: 5
+--- !u!114 &4946741753114905793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765057966925682973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc1795e477c36b488a0176b851dd76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8081256620278593452
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,11 +768,11 @@ PrefabInstance:
       objectReference: {fileID: 3591813251496170235}
     - target: {fileID: 7406363108666867573, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: networkId
-      value: 57
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 8883296847118093829, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: networkId
-      value: 58
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8883296847118093829, guid: 83c8e8e648101f649acb41cddee7d7f7, type: 3}
       propertyPath: predictableFor.playerIndex

@@ -6,12 +6,16 @@ public class PlayerData : MonoBehaviour
 {
 	[Header("Parameters:")]
 	[SerializeField] private int playerId = 0;
+	[SerializeField] private string nickname = "";
+	[SerializeField] private Color themeColor = Color.white;
 
 	[Header("References:")]
 	[SerializeField] private StatsController statsController = null;
 	[SerializeField] private DeathController deathController = null;
 
 	public int PlayerId => playerId;
-	public StatsController StatsController => statsController;
+	public string Nickname => nickname;
+	public Color ThemeColor => themeColor;
 	public DeathController DeathController => deathController;
+	public StatsController StatsController => statsController;
 }

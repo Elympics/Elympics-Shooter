@@ -10,6 +10,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 	[SerializeField] private MovementController movementController = null;
 	[SerializeField] private ViewController viewController = null;
 	[SerializeField] private LoadoutController loadoutController = null;
+	[SerializeField] private HUDController hudController = null;
 	[SerializeField] private PlayerData playerData = null;
 
 	private InputProvider inputProvider = null;
@@ -43,6 +44,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		//action buttons
 		inputWriter.Write(inputProvider.Jump);
 		inputWriter.Write(inputProvider.WeaponPrimaryAction);
+		inputWriter.Write(inputProvider.ShowScoreboard);
 		inputWriter.Write(inputProvider.WeaponSlot);
 	}
 
@@ -57,6 +59,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 
 		inputDeserializer.Read(out bool jump);
 		inputDeserializer.Read(out bool weaponPrimaryAction);
+		inputDeserializer.Read(out bool showScoreboard);
 		inputDeserializer.Read(out int weaponSlot);
 
 		if (playerData.PlayerId != (int)player)
@@ -67,6 +70,13 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		ProcessMouse(Quaternion.Euler(new Vector3(xRotation, yRotation, zRotation)));
 
 		ProcessLoadoutActions(weaponPrimaryAction, weaponSlot);
+
+		ProcessHUDActions(showScoreboard);
+	}
+
+	private void ProcessHUDActions(bool showScoreboard)
+	{
+		hudController.ProcessHUDActions(showScoreboard);
 	}
 
 	private void ProcessMouse(Quaternion mouseRotation)

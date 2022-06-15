@@ -18,6 +18,7 @@ public class InputProvider : MonoBehaviour
 
 	public bool Jump { get; private set; }
 	public bool WeaponPrimaryAction { get; private set; }
+	public bool ShowScoreboard { get; private set; }
 	public int WeaponSlot { get; private set; }
 
 	private void Update()
@@ -32,6 +33,8 @@ public class InputProvider : MonoBehaviour
 
 		Jump = Input.GetButton("Jump");
 		WeaponPrimaryAction = Input.GetButton("Fire1");
+		ShowScoreboard = Input.GetKey(KeyCode.Tab);
+
 		WeaponSlot = Input.GetKey(KeyCode.Alpha1) ? 0 :
 			Input.GetKey(KeyCode.Alpha2) ? 1 : -1;
 	}
