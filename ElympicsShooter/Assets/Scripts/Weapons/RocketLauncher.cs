@@ -8,6 +8,10 @@ public class RocketLauncher : Weapon
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private ProjectileBullet bulletPrefab = null;
 
+	[Header("Rocke launcher visual references:")]
+	[SerializeField] private GameObject bulletLoadedPreview = null;
+	[SerializeField] private ParticleSystem showExplosionPS = null;
+
 	public ProjectileBullet BulletPrefab => bulletPrefab;
 
 	private bool launchBullet = false;
@@ -26,10 +30,18 @@ public class RocketLauncher : Weapon
 			var bullet = CreateBullet();
 
 			bullet.transform.position = bulletSpawnPoint.position;
+			bullet.transform.rotation = bulletSpawnPoint.transform.rotation;
 			bullet.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
 
 			launchBullet = false;
+
+			showExplosionPS?.Play();
 		}
+	}
+
+	private void Update()
+	{
+		bulletLoadedPreview.SetActive(IsReady);
 	}
 
 	private GameObject CreateBullet()
