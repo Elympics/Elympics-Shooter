@@ -1,6 +1,6 @@
 ARG UNITY_VERSION
 
-FROM registry.app.daftmobile.com/unity/unity-docker-build:${UNITY_VERSION}-web
+FROM registry.app.daftmobile.com/unity/unity-docker-build:${UNITY_VERSION}-webserver
 
 WORKDIR /root/project
 CMD ["/bin/bash", "-l"]
