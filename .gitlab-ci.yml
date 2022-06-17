@@ -43,7 +43,7 @@ cache:
       when: manual
 
 .env:unity:
-  image: registry.app.daftmobile.com/elympics/games/shooter:${CI_UNITY_VERSION}-web
+  image: registry.app.daftmobile.com/elympics/games/shooter:${CI_UNITY_VERSION}-webserver
   tags:
     - docker-local
 
