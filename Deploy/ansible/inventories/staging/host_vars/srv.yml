@@ -1,0 +1,3 @@
+ansible_host: 35.157.100.30
+ansible_port: 2200
+deploy_root: shooter

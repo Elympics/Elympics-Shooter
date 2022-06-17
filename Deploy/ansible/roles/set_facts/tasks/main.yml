@@ -1,0 +1,11 @@
+- name: Evaluate correct ssh key path (rsync fix)
+  set_fact: 
+    ansible_ssh_private_key: "{{ ansible_ssh_private_key }}"
+  when: ansible_ssh_private_key is defined
+- name: Set name of local and remote project directory
+  set_fact:
+    LOCAL_PROJECT_DIRECTORY: "{{ playbook_dir }}/../.."
+    REMOTE_PROJECT_DIRECTORY: "{{ ansible_env.HOME }}/{{ hostvars['srv'].deploy_root }}"
+    LOCAL_BUILD_DIRECTORY: "CIBuildResult"
+    COMMIT_REF_SLUG: "{{ lookup('env', 'CI_COMMIT_REF_SLUG') }}"
+    REMOTE_PROJECT_PATH: "{{ lookup('env', 'CI_REMOTE_PROJECT_PATH') | default('', False) }}"
