@@ -1,0 +1,113 @@
+fastlane_version "2.17.1"
+
+def projectpath
+  File.join(rootpath, project_folder_name)
+end
+
+def rootpath
+  File.expand_path("..", Dir.pwd)
+end
+
+def logdirectory
+  "#{rootpath}/CILog"
+end
+
+def unitypath
+  if (sh("uname").start_with? "Darwin") then
+    versionFile = "#{projectpath}/ProjectSettings/ProjectVersion.txt"
+    editorVersion = File.foreach(versionFile).grep(/m_EditorVersion/).first.gsub("m_EditorVersion: ", "").gsub("\n", "")
+    return "/Applications/Unity_Versions/#{editorVersion}/Unity.app/Contents/MacOS/Unity"
+  else
+    return "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' unity-editor"
+  end
+end
+
+lane :test do
+  execute_unity("-editorTestsResultFile #{logdirectory}/testsresult.xml -runTests -runSynchronously")
+end
+
+lane :prepare do
+end
+
+lane :build_server do
+  puts "Executing CITools.BuildAndUploadServer with build number >>> #{build_number} <<<"
+  execute_unity("-quit -executeMethod CITools.BuildAndUploadServer #{build_number}")
+end
+
+lane :build_windows do
+  puts "Executing CITools.BuildWindows with build number >>> #{build_number} <<<"
+  execute_unity("-quit -executeMethod CITools.BuildWindows #{rootpath}/CIBuildResult/WindowsClient.exe #{build_number}")
+end
+
+lane :build_macos do
+  puts "Executing CITools.BuildMacOS with build number >>> #{build_number} <<<"
+  execute_unity("-quit -executeMethod CITools.BuildMacOS #{rootpath}/CIBuildResult/MacClient.app #{build_number}")
+end
+
+lane :build_web do
+  puts "Executing CITools.BuildWeb with build number >>> #{build_number} <<<"
+  execute_unity("-quit -executeMethod CITools.BuildWeb #{rootpath}/CIBuildResult/ #{build_number}")
+end
+
+def execute_unity(args)
+  sh("#{unitypath} "\
+  "-batchmode "\
+  "-projectPath #{projectpath} "\
+  "-logFile #{logdirectory}/unity.log "\
+  + args)
+end
+
+def version_number_from_tag
+  sh('git fetch --tags')
+  t = sh('git describe --tags')
+  if t.nil? || t.start_with?('ci/unity/') == false
+    exit
+  end
+  version = t.split('/').last.to_i
+  version
+end
+
+def build_number
+  (ENV['CI_PIPELINE_IID'].to_i) || 1
+end
+
+def app_version
+  (ENV['CI_APP_VERSION'] || "0.1.0")
+end
+
+def bundle_id
+  (ENV['CI_BUNDLE_ID'] || "cc.elympics.shooter")
+end
+
+def adhoc?
+  not production?
+end
+
+def production?
+  return environment == 'production'
+end
+
+def staging?
+  return environment == 'staging'
+end
+
+def alpha?
+  return environment == 'alpha'
+end
+
+def environment
+  ENV['CI_APP_ENVIRONMENT'] || 'staging'
+end
+
+def project_folder_name
+  ENV['PROJECT_FOLDER_NAME']
+end
+
+def changelog
+  changelog_from_git_commits(
+    pretty: "%s (%aN)",
+    date_format: "short",
+    commits_count: 10,
+    merge_commit_filtering: "exclude_merges"
+  )
+end
