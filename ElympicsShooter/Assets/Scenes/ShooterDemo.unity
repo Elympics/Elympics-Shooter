@@ -271,97 +271,9 @@ PrefabInstance:
       propertyPath: playerScoresManager
       value: 
       objectReference: {fileID: 1946342223}
-    - target: {fileID: 914605529504466408, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 914605529504466408, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 914605529504466408, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 914605529504466408, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 914605529504466408, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3656111779510502882, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
       propertyPath: m_Name
       value: Scoreboard
-      objectReference: {fileID: 0}
-    - target: {fileID: 3910731606058256209, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096193999454098370, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581516631042849227, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581516631042849227, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581516631042849227, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581516631042849227, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581516631042849227, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6015388282998695567, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6015388282998695567, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6015388282998695567, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6015388282998695567, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6015388282998695567, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7590814509448227868, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7590814509448227868, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7590814509448227868, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7590814509448227868, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7590814509448227868, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8004367118720552163, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
       propertyPath: m_Pivot.x
@@ -1291,6 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112e3c081b43e784c95d12bdb1a28b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerScoresManager: {fileID: 1946342223}
 --- !u!1 &1093887675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,6 +2874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersProvider: {fileID: 1639872750}
+  pointsRequiredToWin: 5
 --- !u!114 &1946342224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,6 +3000,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 766918988116199597, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: playerScoresManager
+      value: 
+      objectReference: {fileID: 1946342223}
     - target: {fileID: 5520310206468531972, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -3138,6 +3056,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7298626438964946805, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: playerScoresManager
+      value: 
+      objectReference: {fileID: 1946342223}
     - target: {fileID: 7633924064196379805, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: networkId
       value: 3
@@ -3159,6 +3081,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 2007163166125340341, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: playerScoresManager
+      value: 
+      objectReference: {fileID: 1946342223}
     - target: {fileID: 2176117059227933393, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3215,6 +3141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_0
       objectReference: {fileID: 0}
+    - target: {fileID: 8374349575418976621, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: playerScoresManager
+      value: 
+      objectReference: {fileID: 1946342223}
     - target: {fileID: 8548324363872510245, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_IsActive
       value: 1

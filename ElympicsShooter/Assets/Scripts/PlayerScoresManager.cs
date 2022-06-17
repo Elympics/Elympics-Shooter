@@ -4,11 +4,14 @@ using UnityEngine;
 using Elympics;
 using System;
 
-public class PlayerScoresManager : MonoBehaviour, IInitializable
+public class PlayerScoresManager : ElympicsMonoBehaviour, IInitializable
 {
 	[SerializeField] private PlayersProvider playersProvider = null;
+	[SerializeField] private int pointsRequiredToWin = 10;
 
 	private ElympicsArray<ElympicsInt> playerScores = null;
+	public ElympicsInt WinnerPlayerId { get; } = new ElympicsInt(-1);
+	public ElympicsBool GameEnded { get; } = new ElympicsBool(false);
 
 	public bool IsReady { get; private set; } = false;
 	public event Action IsReadyChanged = null;
@@ -49,6 +52,13 @@ public class PlayerScoresManager : MonoBehaviour, IInitializable
 		//otherwise add point
 		else
 			playerScores.Values[killer].Value++;
+
+		//Check if points required to win reached
+		if (Elympics.IsServer && playerScores.Values[killer].Value >= pointsRequiredToWin)
+		{
+			WinnerPlayerId.Value = killer;
+			GameEnded.Value = true;
+		}
 	}
 
 	private void PreparePlayerScores()

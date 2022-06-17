@@ -12,12 +12,21 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 	[SerializeField] private LoadoutController loadoutController = null;
 	[SerializeField] private HUDController hudController = null;
 	[SerializeField] private PlayerData playerData = null;
+	[SerializeField] private PlayerScoresManager playerScoresManager = null;
 
 	private InputProvider inputProvider = null;
+	private bool canProcessInputs = true;
 
 	public void Initialize()
 	{
 		this.inputProvider = GetComponent<InputProvider>();
+
+		playerScoresManager.GameEnded.ValueChanged += OnGameEndedStatusChanged;
+	}
+
+	private void OnGameEndedStatusChanged(bool gameEndedLastValue, bool gameEndedNewValue)
+	{
+		canProcessInputs &= !gameEndedNewValue;
 	}
 
 	public void GetInputForBot(IInputWriter inputSerializer)
@@ -62,7 +71,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		inputDeserializer.Read(out bool showScoreboard);
 		inputDeserializer.Read(out int weaponSlot);
 
-		if (playerData.PlayerId != (int)player)
+		if ((playerData.PlayerId != (int)player) || !canProcessInputs)
 			return;
 
 		ProcessMovement(forwardMovement, rightMovement, jump);

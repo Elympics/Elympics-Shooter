@@ -11,6 +11,9 @@ public class Scoreboard : MonoBehaviour
 	[SerializeField] private CanvasGroup canvasGroup = null;
 	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private PlayerScoresManager playerScoresManager = null;
+	[SerializeField] private GameOverScreenViewController gameOverScreenViewController = null;
+
+	private HUDController clientHudController = null;
 
 	private void Awake()
 	{
@@ -24,18 +27,35 @@ public class Scoreboard : MonoBehaviour
 	{
 		if (playersProvider.ClientPlayer.TryGetComponent(out HUDController hudController))
 		{
+			clientHudController = hudController;
 			hudController.ShowScoreboardValueChanged += SetScoreboardDisplayStatus;
 		}
 
 		if (playerScoresManager.IsReady)
-			CreatePlayerCards();
+			SubscribeToPlayerScoreManager();
 		else
-			playerScoresManager.IsReadyChanged += CreatePlayerCards;
+			playerScoresManager.IsReadyChanged += SubscribeToPlayerScoreManager;
 	}
 
 	private void SetScoreboardDisplayStatus(bool showScoreboard)
 	{
 		canvasGroup.alpha = showScoreboard ? 1.0f: 0.0f;
+	}
+
+	private void SubscribeToPlayerScoreManager()
+	{
+		CreatePlayerCards();
+
+		playerScoresManager.WinnerPlayerId.ValueChanged += OnWinnerPlayerIdSet;
+	}
+
+	private void OnWinnerPlayerIdSet(int lastValue, int newValue)
+	{
+		clientHudController.ShowScoreboardValueChanged -= SetScoreboardDisplayStatus;
+
+		SetScoreboardDisplayStatus(true);
+
+		gameOverScreenViewController.ShowGameOverScreen(playersProvider.AllPlayersInScene[newValue]);
 	}
 
 	private void CreatePlayerCards()

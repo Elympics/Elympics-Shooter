@@ -9,6 +9,7 @@ public class MovementController : ElympicsMonoBehaviour
 {
 	[Header("References:")]
 	[SerializeField] private DeathController deathController = null;
+	[SerializeField] private PlayerScoresManager playerScoresManager = null;
 
 	[Header("Parameters:")]
 	[SerializeField] private float movementSpeed = 0.0f;
@@ -22,6 +23,16 @@ public class MovementController : ElympicsMonoBehaviour
 	private void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody>();
+
+		playerScoresManager.GameEnded.ValueChanged += OnGameEndedStatusChanged;
+	}
+
+	private void OnGameEndedStatusChanged(bool gameEndedLastValue, bool gameEndedNewValue)
+	{
+		if (gameEndedNewValue)
+		{
+			rigidbody.velocity = Vector3.zero;
+		}
 	}
 
 	public void ProcessMovement(float forwardMovementValue, float rightMovementValue, bool jump)
