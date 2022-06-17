@@ -33,7 +33,7 @@ public class RailGun : Weapon
 
 		if (isLoadingToShot)
 		{
-			ChangeCurrentLoadingTime(currentLoadingTime.Value += Elympics.TickDuration);
+			ChangeCurrentLoadingTime(currentLoadingTime.Value + Elympics.TickDuration);
 
 			if (currentLoadingTime >= loadingTime)
 				ProcessRayShot();

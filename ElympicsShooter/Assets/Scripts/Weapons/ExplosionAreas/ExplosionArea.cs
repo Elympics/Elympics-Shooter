@@ -26,7 +26,8 @@ public class ExplosionArea : ElympicsMonoBehaviour
 
 		foreach (Collider objectInExplosionRange in objectsInExplosionRange)
 		{
-			TryToApplyDamageToTarget(objectInExplosionRange.transform.root.gameObject);
+			if (TargetIsNotBehindObstacle(objectInExplosionRange.transform.root.gameObject))
+				TryToApplyDamageToTarget(objectInExplosionRange.transform.root.gameObject);
 		}
 	}
 
@@ -37,6 +38,19 @@ public class ExplosionArea : ElympicsMonoBehaviour
 			//TODO: Add damage modification depending on distance from explosion center
 			targetStatsController.ChangeHealth(-explosionDamage, (int)bulletOwner.PredictableFor);
 		}
+	}
+
+	private bool TargetIsNotBehindObstacle(GameObject objectInExplosionRange)
+	{
+		var directionToObjectInExplosionRange = (objectInExplosionRange.transform.position - this.transform.position).normalized;
+
+		if (Physics.Raycast(this.transform.position, directionToObjectInExplosionRange, out RaycastHit hit, explosionRange))
+		{
+			Debug.Log("I hit " + hit.transform.gameObject.name);
+			return hit.transform.gameObject == objectInExplosionRange;
+		}
+
+		return false;
 	}
 
 	private void OnDrawGizmosSelected()

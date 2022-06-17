@@ -9,8 +9,8 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 	[Header("Parameters:")]
 	[SerializeField] private float deathTime = 2.0f;
 
-	public ElympicsBool IsDead { get; private set; } = new ElympicsBool(false);
-	public ElympicsFloat CurrentDeathTime { get; private set; } = new ElympicsFloat(0.0f);
+	public ElympicsBool IsDead { get; } = new ElympicsBool(false);
+	public ElympicsFloat CurrentDeathTime { get; } = new ElympicsFloat(0.0f);
 
 	public event Action PlayerRespawned = null;
 	public event Action<int, int> HasBeenKilled = null;
