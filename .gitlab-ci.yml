@@ -1,0 +1,179 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: normal
+  GIT_STRATEGY: fetch
+  GIT_DEPTH: 10
+  CI_UNITY_VERSION: 2021.3.3f1
+  CI_APP_VERSION: 0.1.0
+  ANSIBLE_INVENTORY: staging
+  DEPLOY_DOMAIN: shooter-demo.elympics.cc
+  PROJECT_FOLDER_NAME: ElympicsShooter
+  CI_REMOTE_PROJECT_PATH: dev
+
+stages:
+  - prepare
+  - build
+  - deploy
+
+# ==================== CACHE ===================
+
+cache:
+  key: ${CI_JOB_NAME}
+  paths:
+    - Library
+
+# =================== COMMON ===================
+
+.cond:build:dev:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.cond:build:anyfull:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.cond:deploy:dev:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+
+.env:unity:
+  image: registry.app.daftmobile.com/elympics/games/shooter:${CI_UNITY_VERSION}-webserver
+  tags:
+    - docker-local
+
+.env:deploy:
+  image: quay.io/ansible/ansible-runner:latest
+  tags:
+    - docker
+
+## License
+
+.prepare_ssh: &prepare_ssh |-
+  eval $(ssh-agent -s)
+  echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  echo "$SSH_CONFIG" >> ~/.ssh/config
+  echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+  chmod 644 ~/.ssh/config
+  chmod 644 ~/.ssh/known_hosts
+
+.prepare_unity: &prepare_unity |-
+  echo "$UNITY_MANUAL_LICENSE" > Unity_lic.ulf
+  $UNITY_PATH/Editor/Unity -batchmode -nographics -manualLicenseFile Unity_lic.ulf || true
+
+.prepare_all: &prepare_all
+  - *prepare_ssh
+  - *prepare_unity
+
+generate:license:
+  extends: .env:unity
+  stage: prepare
+  needs: []
+  before_script: []
+  script:
+    - $UNITY_PATH/Editor/Unity -batchmode/Editor/Unity -batchmode -nographics -createManualActivationFile -logfile /dev/stdout || true
+    - cat Unity_v${CI_UNITY_VERSION}.alf
+    - echo "Activate this on https://license.unity3d.com/manual and put content of .ulf file into $UNITY_MANUAL_LICENSE env var"
+  artifacts:
+    expire_in: 10 minutes
+    paths:
+      - Unity_v${CI_UNITY_VERSION}.alf
+  variables:
+    GIT_STRATEGY: none
+  when: always
+  only:
+    refs:
+      - web
+    variables:
+      - $REFRESH_LICENSE
+
+before_script:
+  - if [ -f /etc/profile.d/rvm.sh ]; then source /etc/profile.d/rvm.sh || true; fi # fix for non login shell
+  - bundle install
+
+.build:
+  stage: build
+  extends:
+    - .env:unity
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - CILog/unity.log
+      - CIBuildResult/
+
+.build:dev:
+  extends:
+    - .build
+    - .cond:build:dev
+
+build:server:
+  extends:
+    - .build
+    - .cond:build:anyfull
+  script:
+    - *prepare_all
+    - bundle exec fastlane build_server
+
+.deploy:
+  stage: deploy
+  extends:
+    - .env:deploy
+  before_script:
+    - *prepare_ssh
+  script:
+    - ansible-playbook -i Deploy/ansible/inventories/$ANSIBLE_INVENTORY Deploy/ansible/$ANSIBLE_COMMAND.yml
+
+.deploy:start:
+  extends: .deploy
+  variables:
+    ANSIBLE_COMMAND: deploy
+
+.deploy:stop:
+  extends: .deploy
+  variables:
+    ANSIBLE_COMMAND: remove
+
+# =================== CLIENTS =======================
+
+.build:client:web:
+  script:
+    - *prepare_all
+    - bundle exec fastlane build_web
+  environment:
+    name: $CI_REMOTE_PROJECT_PATH
+    url: https://$DEPLOY_DOMAIN
+    action: prepare
+
+build:client:web:dev:
+  extends:
+    - .build:client:web
+    - .build:dev
+
+
+# =================== DEPLOY =======================
+
+.deploy:web:start:
+  extends:
+    - .deploy:start
+  environment:
+    name: $CI_REMOTE_PROJECT_PATH
+    url: https://$DEPLOY_DOMAIN
+    action: start
+
+deploy:web:dev:
+  extends:
+    - .deploy:web:start
+    - .cond:deploy:dev
+  needs:
+    - job: build:client:web:dev
+      artifacts: true
+    - job: build:server
+      artifacts: false

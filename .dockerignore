@@ -1,0 +1,6 @@
+*
+
+!Gemfile
+!Gemfile.lock
+!.dockerignore
+!fastlane/Pluginfile
