@@ -8,13 +8,13 @@
       "hash": "ecc5be9465e642138bbdde0251e6ab6bfc0deca9"
     },
     "com.daftmobile.web3kit": {
-      "version": "git@gitlab.app.daftmobile.com:elympics/tools/elympics-web3-kit.git",
+      "version": "https://github.com/Elympics/Unity-Web3-Kit.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.daftmobile.elympics": "0.2.7"
       },
-      "hash": "09a939f97a1349150e31ec61acbbc48a4bc91fb1"
+      "hash": "425c056a7f7060c32ce9cdc423318b465dcb2ce8"
     },
     "com.unity.collab-proxy": {
       "version": "1.15.16",
