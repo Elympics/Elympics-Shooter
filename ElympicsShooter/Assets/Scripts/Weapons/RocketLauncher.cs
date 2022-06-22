@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Elympics;
 
@@ -8,35 +6,21 @@ public class RocketLauncher : Weapon
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private ProjectileBullet bulletPrefab = null;
 
-	[Header("Rocke launcher visual references:")]
+	[Header("Rocket launcher visual references:")]
 	[SerializeField] private GameObject bulletLoadedPreview = null;
 	[SerializeField] private ParticleSystem showExplosionPS = null;
 
 	public ProjectileBullet BulletPrefab => bulletPrefab;
 
-	private bool launchBullet = false;
-
 	protected override void ProcessWeaponAction()
 	{
-		launchBullet = true;
-	}
+		var bullet = CreateBullet();
 
-	public override void ElympicsUpdate()
-	{
-		base.ElympicsUpdate();
+		bullet.transform.position = bulletSpawnPoint.position;
+		bullet.transform.rotation = bulletSpawnPoint.transform.rotation;
+		bullet.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
 
-		if (launchBullet)
-		{
-			var bullet = CreateBullet();
-
-			bullet.transform.position = bulletSpawnPoint.position;
-			bullet.transform.rotation = bulletSpawnPoint.transform.rotation;
-			bullet.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
-
-			launchBullet = false;
-
-			showExplosionPS?.Play();
-		}
+		showExplosionPS?.Play();
 	}
 
 	private void Update()

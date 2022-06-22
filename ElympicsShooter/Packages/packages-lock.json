@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "ecc5be9465e642138bbdde0251e6ab6bfc0deca9"
+      "hash": "a055bcc2504405073b217c3322c5d92e5c38f72f"
     },
     "com.daftmobile.web3kit": {
       "version": "https://github.com/Elympics/Unity-Web3-Kit.git",
@@ -44,8 +44,8 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.ide.visualstudio": "2.0.14",
-        "com.unity.ide.rider": "3.0.13",
+        "com.unity.ide.visualstudio": "2.0.15",
+        "com.unity.ide.rider": "3.0.14",
         "com.unity.ide.vscode": "1.2.5",
         "com.unity.editorcoroutines": "1.0.0",
         "com.unity.performance.profile-analyzer": "1.1.1",
