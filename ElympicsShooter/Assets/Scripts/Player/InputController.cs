@@ -5,7 +5,7 @@ using Elympics;
 using System;
 
 [RequireComponent(typeof(InputProvider))]
-public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializable
+public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializable, IUpdatable
 {
 	[SerializeField] private MovementController movementController = null;
 	[SerializeField] private ViewController viewController = null;
@@ -29,14 +29,15 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		canProcessInputs &= !gameEndedNewValue;
 	}
 
-	public void GetInputForBot(IInputWriter inputSerializer)
+	public void OnInputForBot(IInputWriter inputSerializer)
 	{
-		SerializeInput(inputSerializer);
+		// TODO
 	}
 
-	public void GetInputForClient(IInputWriter inputSerializer)
+	public void OnInputForClient(IInputWriter inputSerializer)
 	{
-		SerializeInput(inputSerializer);
+		if (Elympics.Player == ElympicsPlayer.FromIndex(playerData.PlayerId))
+			SerializeInput(inputSerializer);
 	}
 
 	private void SerializeInput(IInputWriter inputWriter)
@@ -57,30 +58,35 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 		inputWriter.Write(inputProvider.WeaponSlot);
 	}
 
-	public void ApplyInput(ElympicsPlayer player, IInputReader inputDeserializer)
+	public void ElympicsUpdate()
 	{
-		inputDeserializer.Read(out float forwardMovement);
-		inputDeserializer.Read(out float rightMovement);
+		float forwardMovement = 0.0f;
+		float rightMovement = 0.0f;
+		bool jump = false;
 
-		inputDeserializer.Read(out float xRotation);
-		inputDeserializer.Read(out float yRotation);
-		inputDeserializer.Read(out float zRotation);
+		if (canProcessInputs && ElympicsBehaviour.TryGetInput(ElympicsPlayer.FromIndex(playerData.PlayerId), out var inputDeserializer))
+		{
 
-		inputDeserializer.Read(out bool jump);
-		inputDeserializer.Read(out bool weaponPrimaryAction);
-		inputDeserializer.Read(out bool showScoreboard);
-		inputDeserializer.Read(out int weaponSlot);
+			inputDeserializer.Read(out forwardMovement);
+			inputDeserializer.Read(out rightMovement);
 
-		if ((playerData.PlayerId != (int)player) || !canProcessInputs)
-			return;
+			inputDeserializer.Read(out float xRotation);
+			inputDeserializer.Read(out float yRotation);
+			inputDeserializer.Read(out float zRotation);
+
+			inputDeserializer.Read(out jump);
+			inputDeserializer.Read(out bool weaponPrimaryAction);
+			inputDeserializer.Read(out bool showScoreboard);
+			inputDeserializer.Read(out int weaponSlot);
+
+			ProcessMouse(Quaternion.Euler(new Vector3(xRotation, yRotation, zRotation)));
+
+			ProcessLoadoutActions(weaponPrimaryAction, weaponSlot);
+
+			ProcessHUDActions(showScoreboard);
+		}
 
 		ProcessMovement(forwardMovement, rightMovement, jump);
-
-		ProcessMouse(Quaternion.Euler(new Vector3(xRotation, yRotation, zRotation)));
-
-		ProcessLoadoutActions(weaponPrimaryAction, weaponSlot);
-
-		ProcessHUDActions(showScoreboard);
 	}
 
 	private void ProcessHUDActions(bool showScoreboard)
