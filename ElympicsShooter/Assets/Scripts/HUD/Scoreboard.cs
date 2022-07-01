@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Scoreboard : MonoBehaviour
@@ -14,6 +15,7 @@ public class Scoreboard : MonoBehaviour
 	[SerializeField] private GameOverScreenViewController gameOverScreenViewController = null;
 
 	private HUDController clientHudController = null;
+	private List<ScoreboardPlayerCard> createdScoreboardPlayerCards = new List<ScoreboardPlayerCard>();
 
 	private void Awake()
 	{
@@ -66,7 +68,22 @@ public class Scoreboard : MonoBehaviour
 		foreach (PlayerData playerData in playersProvider.AllPlayersInScene)
 		{
 			var createdCard = Instantiate(scoreboardPlayerCardPrefab, cardsContainer);
-			createdCard.Initialize(playerData, playerScoresManager.GetScoreForPlayer(playerData.PlayerId));
+			createdCard.Initialize(playerData, playerScoresManager.GetScoreForPlayer(playerData.PlayerId), RefreshOrderOfScoreboardPlayerCard);
+
+			createdScoreboardPlayerCards.Add(createdCard);
+		}
+	}
+
+	private void RefreshOrderOfScoreboardPlayerCard()
+	{
+		var sortedCards = createdScoreboardPlayerCards.OrderByDescending(x => x.PlayerScore);
+
+		int siblingIndex = 0;
+
+		foreach (ScoreboardPlayerCard playerCard in sortedCards)
+		{
+			playerCard.transform.SetSiblingIndex(siblingIndex);
+			siblingIndex++;
 		}
 	}
 }
