@@ -11,18 +11,26 @@ public class ScoreboardPlayerCard : MonoBehaviour
 	[Header("References:")]
 	[SerializeField] private Image playerIcon = null;
 	[SerializeField] private TextMeshProUGUI playerNickname = null;
-	[SerializeField] private TextMeshProUGUI playerScore = null;
+	[SerializeField] private TextMeshProUGUI playerScoreText = null;
 
-	public void Initialize(PlayerData assignedPlayerData, ElympicsInt playerScore)
+	public int PlayerScore { get; private set; } = -1;
+
+	public void Initialize(PlayerData assignedPlayerData, ElympicsInt playerScore, Action OnPlayerScoreChanged)
 	{
 		SetupView(assignedPlayerData);
 
-		playerScore.ValueChanged += UpdateScoreView;
+		playerScore.ValueChanged += (int lastValue, int newValue) =>
+			{
+				UpdateScoreView(newValue);
+				OnPlayerScoreChanged();
+			};
 	}
 
-	private void UpdateScoreView(int lastValue, int newValue)
+	private void UpdateScoreView(int newValue)
 	{
-		playerScore.text = newValue.ToString();
+		PlayerScore = newValue;
+
+		playerScoreText.text = newValue.ToString();
 	}
 
 	private void SetupView(PlayerData assignedPlayerData)

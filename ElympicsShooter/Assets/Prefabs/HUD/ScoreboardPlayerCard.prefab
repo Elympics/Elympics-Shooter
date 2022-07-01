@@ -553,4 +553,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIcon: {fileID: 2276126521289152460}
   playerNickname: {fileID: 6026536458417886033}
-  playerScore: {fileID: 5475162390684070634}
+  playerScoreText: {fileID: 5475162390684070634}
