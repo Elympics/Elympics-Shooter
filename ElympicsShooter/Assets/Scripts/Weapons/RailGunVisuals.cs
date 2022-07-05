@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Elympics;
+using Cinemachine;
 
 [RequireComponent(typeof(RailGun))]
 public class RailGunVisuals : ElympicsMonoBehaviour
@@ -12,7 +13,7 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 	[SerializeField] private Image[] loadingBars = null;
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private LineRenderer trailRendererPrefab = null;
-	[SerializeField] private new Camera camera = null;
+	[SerializeField] private CinemachineVirtualCamera cinemachinePlayerCamera = null;
 
 	[Header("Parameters:")]
 	[SerializeField] private float trailLifetime = 0.5f;
@@ -53,7 +54,7 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 		}
 		else
 		{
-			railRenderPoints.Values[1].Value = camera.transform.position + (camera.transform.forward * 100.0f);
+			railRenderPoints.Values[1].Value = cinemachinePlayerCamera.transform.position + (cinemachinePlayerCamera.transform.forward * 100.0f);
 		}
 
 		CastRay();
