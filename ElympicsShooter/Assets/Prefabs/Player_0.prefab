@@ -436,6 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultCamera: {fileID: 3383110756971529387}
+  thirdPersonCamera: {fileID: 1784972098564503959}
 --- !u!114 &978363736352741455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +680,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8237618501043541294}
   - component: {fileID: 1784972098564503959}
+  - component: {fileID: 1536693124170309981}
+  - component: {fileID: 2223052005174583768}
   m_Layer: 0
   m_Name: ThirdPersonCMCamera
   m_TagString: Untagged
@@ -740,6 +743,51 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 103526689501997634}
+--- !u!114 &1536693124170309981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607858769975322331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba95f28e8783b124ca0ffea7795315b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathController: {fileID: 978363736352741455}
+  playersProvider: {fileID: 0}
+  playerCamerasController: {fileID: 8914176383838103783}
+  playerData: {fileID: 250967938}
+  thirdPersonCamera: {fileID: 1784972098564503959}
+--- !u!114 &2223052005174583768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607858769975322331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334c2a3facb248ac8c1a599797c52dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceNetworkId: 0
+  networkId: 68
+  predictableFor:
+    playerIndex: 0
+  visibleFor:
+    playerIndex: -3
+  stateFrequencyStages:
+  - stageDurationInMiliseconds: 500
+    frequencyInMiliseconds: 30
+    maxStageDurationInMiliseconds: 5000
+  - stageDurationInMiliseconds: 1000
+    frequencyInMiliseconds: 200
+    maxStageDurationInMiliseconds: 5000
+  - stageDurationInMiliseconds: 1000
+    frequencyInMiliseconds: 1000
+    maxStageDurationInMiliseconds: 5000
 --- !u!1 &8769422818515297169
 GameObject:
   m_ObjectHideFlags: 0

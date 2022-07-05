@@ -11,6 +11,7 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 
 	public ElympicsBool IsDead { get; } = new ElympicsBool(false);
 	public ElympicsFloat CurrentDeathTime { get; } = new ElympicsFloat(0.0f);
+	public ElympicsInt KillerId { get; } = new ElympicsInt(-1);
 
 	public event Action PlayerRespawned = null;
 	public event Action<int, int> HasBeenKilled = null;
@@ -27,6 +28,7 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 	{
 		CurrentDeathTime.Value = deathTime;
 		IsDead.Value = true;
+		KillerId.Value = damageOwner;
 
 		HasBeenKilled?.Invoke((int)PredictableFor, damageOwner);
 	}
@@ -49,5 +51,6 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 		PlayersSpawner.Instance.SpawnPlayer(playerData);
 		PlayerRespawned?.Invoke();
 		IsDead.Value = false;
+		KillerId.Value = -1;
 	}
 }

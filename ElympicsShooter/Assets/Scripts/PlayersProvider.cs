@@ -2,6 +2,7 @@ using Elympics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayersProvider : ElympicsMonoBehaviour, IInitializable
@@ -39,5 +40,10 @@ public class PlayersProvider : ElympicsMonoBehaviour, IInitializable
 		//Fix for server side.
 		//TODO: Disable HUD on server
 		ClientPlayer = AllPlayersInScene[0];
+	}
+
+	public PlayerData GetPlayerById(int id)
+	{
+		return AllPlayersInScene.FirstOrDefault(x => x.PlayerId == id);
 	}
 }

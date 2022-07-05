@@ -33,9 +33,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1161296104104690033, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
-      value: 62
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1161296104104690033, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: predictableFor.playerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223052005174583768, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223052005174583768, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: predictableFor.playerIndex
       value: 1
       objectReference: {fileID: 0}

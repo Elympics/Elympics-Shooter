@@ -7,6 +7,7 @@ using System;
 public class PlayerCamerasController : ElympicsMonoBehaviour, IInitializable
 {
 	[SerializeField] private CinemachineVirtualCamera defaultCamera = null;
+	[SerializeField] private CinemachineVirtualCamera thirdPersonCamera = null;
 
 	private CinemachineVirtualCamera[] allCamerasInPlayer = null;
 
@@ -26,11 +27,21 @@ public class PlayerCamerasController : ElympicsMonoBehaviour, IInitializable
 			defaultCamera.Priority = (int)VirtualCamPriority.Active;
 	}
 
-	private void SetDefaultCameraAsActive()
+	public void SetDefaultCameraAsActive()
 	{
 		DisableAllCamerasInPlayer();
+		SetCameraAsActive(defaultCamera);
+	}
 
-		defaultCamera.Priority = (int)VirtualCamPriority.Active;
+	public void SetThirdPersonCameraAsActive()
+	{
+		DisableAllCamerasInPlayer();
+		SetCameraAsActive(thirdPersonCamera);
+	}
+
+	private void SetCameraAsActive(CinemachineVirtualCamera camera)
+	{
+		camera.Priority = (int)VirtualCamPriority.Active;
 	}
 
 	private void DisableAllCamerasInPlayer()

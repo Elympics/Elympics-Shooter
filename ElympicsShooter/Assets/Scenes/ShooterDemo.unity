@@ -366,45 +366,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8004367118720552163, guid: 2c75319a5982b6d439875f97bb85408c, type: 3}
   m_PrefabInstance: {fileID: 101868447}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &141615624 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 54795243819274788, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
-  m_PrefabInstance: {fileID: 1260520272460194018}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &141615626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141615624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowDebugText: 0
-  m_ShowCameraFrustum: 1
-  m_IgnoreTimeScale: 0
-  m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
-  m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
-    m_CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_CameraCutEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CameraActivatedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &286065843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2625,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -3032,7 +2993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersProvider: {fileID: 1639872750}
-  pointsRequiredToWin: 1
+  pointsRequiredToWin: 5
 --- !u!114 &1946342224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3158,10 +3119,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 300943769056436037, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: playersProvider
+      value: 
+      objectReference: {fileID: 1639872750}
     - target: {fileID: 766918988116199597, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: playerScoresManager
       value: 
       objectReference: {fileID: 1946342223}
+    - target: {fileID: 1128040138382483392, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: networkId
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 3704234575241905209, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00005722045
@@ -3283,6 +3252,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1536693124170309981, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: playersProvider
+      value: 
+      objectReference: {fileID: 1639872750}
     - target: {fileID: 2007163166125340341, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: playerScoresManager
       value: 
