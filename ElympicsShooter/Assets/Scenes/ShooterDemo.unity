@@ -2309,6 +2309,7 @@ MonoBehaviour:
   playersProvider: {fileID: 1639872750}
   canvasGroup: {fileID: 1721660001}
   deathTimerText: {fileID: 286065845}
+  playerScoresManager: {fileID: 1946342223}
 --- !u!1 &1829924794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2993,7 +2994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersProvider: {fileID: 1639872750}
-  pointsRequiredToWin: 5
+  pointsRequiredToWin: 2
 --- !u!114 &1946342224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3131,6 +3132,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 2084493864724391511, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: playerScoresManager
+      value: 
+      objectReference: {fileID: 1946342223}
     - target: {fileID: 3704234575241905209, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00005722045
@@ -3248,6 +3253,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 978363736352741455, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: playerScoresManager
+      value: 
+      objectReference: {fileID: 1946342223}
     - target: {fileID: 1161296104104690033, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
       value: 16
