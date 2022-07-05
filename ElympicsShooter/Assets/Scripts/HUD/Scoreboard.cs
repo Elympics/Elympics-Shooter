@@ -51,6 +51,9 @@ public class Scoreboard : MonoBehaviour
 
 	private void OnWinnerPlayerIdSet(int lastValue, int newValue)
 	{
+		if (newValue < 0)
+			return;
+
 		clientHudController.ShowScoreboardValueChanged -= SetScoreboardDisplayStatus;
 
 		SetScoreboardDisplayStatus(true);
