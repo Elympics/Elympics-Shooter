@@ -37,11 +37,11 @@ public class PlayersSpawner : ElympicsMonoBehaviour, IInitializable
 
 	private void InitialSpawnPlayers()
 	{
-		var preparedSpawnPoints = GetRandomizedSpawnPoints().Take(playersProvider.AllPlayersInScene.Length);
+		var preparedSpawnPoints = GetRandomizedSpawnPoints().Take(playersProvider.AllPlayersInScene.Length).ToArray();
 
 		for (int i = 0; i < playersProvider.AllPlayersInScene.Length; i++)
 		{
-			playersProvider.AllPlayersInScene[i].transform.position = preparedSpawnPoints.ElementAt(i).position;
+			playersProvider.AllPlayersInScene[i].transform.position = preparedSpawnPoints[i].position;
 		}
 	}
 

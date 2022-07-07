@@ -3847,7 +3847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersProvider: {fileID: 1639872750}
-  pointsRequiredToWin: 2
+  pointsRequiredToWin: 10
 --- !u!114 &1946342224
 MonoBehaviour:
   m_ObjectHideFlags: 0
