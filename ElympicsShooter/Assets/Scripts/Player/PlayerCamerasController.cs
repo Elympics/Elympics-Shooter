@@ -6,8 +6,19 @@ using System;
 [RequireComponent(typeof(PlayerData))]
 public class PlayerCamerasController : ElympicsMonoBehaviour, IInitializable
 {
-	[SerializeField] private CinemachineVirtualCamera defaultCamera = null;
-	[SerializeField] private CinemachineVirtualCamera thirdPersonCamera = null;
+	[System.Serializable]
+	public struct CMVirtualCameraWithASsignedLayerMask
+	{
+		public CinemachineVirtualCamera VirtualCamera;
+		public LayerMask AssignedLayerMask;
+	}
+
+	[Header("References:")]
+	[SerializeField] private Camera brainCamera = null;
+
+	[Header("Parameters:")]
+	[SerializeField] private CMVirtualCameraWithASsignedLayerMask firstPersonCamera;
+	[SerializeField] private CMVirtualCameraWithASsignedLayerMask thirdPersonCamera;
 
 	private CinemachineVirtualCamera[] allCamerasInPlayer = null;
 
@@ -24,13 +35,13 @@ public class PlayerCamerasController : ElympicsMonoBehaviour, IInitializable
 	private void InitializeCamerasAtGameStart(PlayerData playerData)
 	{
 		if (Elympics.IsClient && (int)Elympics.Player == playerData.PlayerId)
-			defaultCamera.Priority = (int)VirtualCamPriority.Active;
+			firstPersonCamera.VirtualCamera.Priority = (int)VirtualCamPriority.Active;
 	}
 
 	public void SetDefaultCameraAsActive()
 	{
 		DisableAllCamerasInPlayer();
-		SetCameraAsActive(defaultCamera);
+		SetCameraAsActive(firstPersonCamera);
 	}
 
 	public void SetThirdPersonCameraAsActive()
@@ -39,9 +50,11 @@ public class PlayerCamerasController : ElympicsMonoBehaviour, IInitializable
 		SetCameraAsActive(thirdPersonCamera);
 	}
 
-	private void SetCameraAsActive(CinemachineVirtualCamera camera)
+	private void SetCameraAsActive(CMVirtualCameraWithASsignedLayerMask camera)
 	{
-		camera.Priority = (int)VirtualCamPriority.Active;
+		camera.VirtualCamera.Priority = (int)VirtualCamPriority.Active;
+
+		brainCamera.cullingMask = camera.AssignedLayerMask;
 	}
 
 	private void DisableAllCamerasInPlayer()
