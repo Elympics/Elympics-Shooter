@@ -9,7 +9,7 @@ public class DeathScreen : MonoBehaviour
 	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private CanvasGroup canvasGroup = null;
 	[SerializeField] private TextMeshProUGUI deathTimerText = null;
-	[SerializeField] private PlayerScoresManager playerScoresManager = null;
+	[SerializeField] private GameStateController gameStateController = null;
 
 	private bool displayingDeathScreenDisabled = false;
 
@@ -20,15 +20,17 @@ public class DeathScreen : MonoBehaviour
 		else
 			playersProvider.IsReadyChanged += SubscribeToDeathController;
 
-		playerScoresManager.GameEnded.ValueChanged += LockDisplayingDeathScreen;
+		gameStateController.CurrentGameState.ValueChanged += ProcessLockDisplayingDeathScreenBasedOnCurrentGameState;
 	}
 
-	private void LockDisplayingDeathScreen(bool lastValue, bool newValue)
+	private void ProcessLockDisplayingDeathScreenBasedOnCurrentGameState(int lastValue, int newValue)
 	{
-		if (newValue)
+		if ((GameState)newValue == GameState.MatchEnded)
+		{
 			displayingDeathScreenDisabled = true;
 
-		canvasGroup.alpha = 0.0f;
+			canvasGroup.alpha = 0.0f;
+		}
 	}
 
 	private void SubscribeToDeathController()

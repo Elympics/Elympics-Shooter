@@ -13,6 +13,7 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 	[SerializeField] private HUDController hudController = null;
 	[SerializeField] private PlayerData playerData = null;
 	[SerializeField] private PlayerScoresManager playerScoresManager = null;
+	[SerializeField] private GameStateController gameController = null;
 
 	private InputProvider inputProvider = null;
 	private bool canProcessInputs = true;
@@ -21,12 +22,13 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 	{
 		this.inputProvider = GetComponent<InputProvider>();
 
-		playerScoresManager.GameEnded.ValueChanged += OnGameEndedStatusChanged;
+		UpdateProcessInputsBasedOnCurrentGameState(gameController.CurrentGameState, gameController.CurrentGameState);
+		gameController.CurrentGameState.ValueChanged += UpdateProcessInputsBasedOnCurrentGameState;
 	}
 
-	private void OnGameEndedStatusChanged(bool gameEndedLastValue, bool gameEndedNewValue)
+	private void UpdateProcessInputsBasedOnCurrentGameState(int lastGameState, int newGameState)
 	{
-		canProcessInputs &= !gameEndedNewValue;
+		canProcessInputs = (GameState)newGameState == GameState.GameplayMatchRunning;
 	}
 
 	public void OnInputForBot(IInputWriter inputSerializer)

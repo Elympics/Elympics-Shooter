@@ -11,7 +11,6 @@ public class PlayerScoresManager : ElympicsMonoBehaviour, IInitializable
 
 	private ElympicsArray<ElympicsInt> playerScores = null;
 	public ElympicsInt WinnerPlayerId { get; } = new ElympicsInt(-1);
-	public ElympicsBool GameEnded { get; } = new ElympicsBool(false);
 
 	public bool IsReady { get; private set; } = false;
 	public event Action IsReadyChanged = null;
@@ -57,7 +56,6 @@ public class PlayerScoresManager : ElympicsMonoBehaviour, IInitializable
 		if (Elympics.IsServer && playerScores.Values[killer].Value >= pointsRequiredToWin)
 		{
 			WinnerPlayerId.Value = killer;
-			GameEnded.Value = true;
 		}
 	}
 

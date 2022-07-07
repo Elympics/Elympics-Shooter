@@ -10,7 +10,7 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 	[SerializeField] private float deathTime = 2.0f;
 
 	[Header("References:")]
-	[SerializeField] private PlayerScoresManager playerScoresManager = null;
+	[SerializeField] private GameStateController gameStateController = null;
 
 	public ElympicsBool IsDead { get; } = new ElympicsBool(false);
 	public ElympicsFloat CurrentDeathTime { get; } = new ElympicsFloat(0.0f);
@@ -51,7 +51,7 @@ public class DeathController : ElympicsMonoBehaviour, IUpdatable
 
 	private void RespawnPlayer()
 	{
-		if (playerScoresManager.GameEnded)
+		if ((GameState)gameStateController.CurrentGameState.Value == GameState.MatchEnded)
 			return;
 
 		PlayersSpawner.Instance.SpawnPlayer(playerData);

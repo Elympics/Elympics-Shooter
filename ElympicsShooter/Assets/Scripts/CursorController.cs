@@ -5,27 +5,33 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-	[SerializeField] private PlayerScoresManager playerScoresManager = null;
+	[SerializeField] private GameStateController gameStateController = null;
 
 	private void Awake()
 	{
-		SetDefaultCursorState();
+		SetCursorLock(true);
 
-		playerScoresManager.GameEnded.ValueChanged += UnlockCursor;
+		gameStateController.CurrentGameState.ValueChanged += SetCursorLockBasedOnCurrentGameState;
 	}
 
-	private void UnlockCursor(bool lastValue, bool newValue)
+	private void SetCursorLockBasedOnCurrentGameState(int lastValue, int newValue)
 	{
-		if (newValue)
+		bool cursorLockState = (GameState)newValue != GameState.MatchEnded;
+
+		SetCursorLock(cursorLockState);
+	}
+
+	private void SetCursorLock(bool cursorLock)
+	{
+		if (cursorLock)
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
+		}
+		else
 		{
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 		}
-	}
-
-	private void SetDefaultCursorState()
-	{
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
 	}
 }

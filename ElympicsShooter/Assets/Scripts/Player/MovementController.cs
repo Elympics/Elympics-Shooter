@@ -9,7 +9,7 @@ public class MovementController : ElympicsMonoBehaviour
 {
 	[Header("References:")]
 	[SerializeField] private DeathController deathController = null;
-	[SerializeField] private PlayerScoresManager playerScoresManager = null;
+	[SerializeField] private GameStateController gameStateController = null;
 
 	[Header("Parameters:")]
 	[SerializeField] private float movementSpeed = 0.0f;
@@ -24,12 +24,12 @@ public class MovementController : ElympicsMonoBehaviour
 	{
 		rigidbody = GetComponent<Rigidbody>();
 
-		playerScoresManager.GameEnded.ValueChanged += OnGameEndedStatusChanged;
+		gameStateController.CurrentGameState.ValueChanged += ResetVelocityIfMatchEnded;
 	}
 
-	private void OnGameEndedStatusChanged(bool gameEndedLastValue, bool gameEndedNewValue)
+	private void ResetVelocityIfMatchEnded(int lastGameState, int newGameState)
 	{
-		if (gameEndedNewValue)
+		if ((GameState)newGameState == GameState.MatchEnded)
 		{
 			rigidbody.velocity = Vector3.zero;
 		}
