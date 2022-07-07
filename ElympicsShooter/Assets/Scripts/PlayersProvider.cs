@@ -23,7 +23,7 @@ public class PlayersProvider : ElympicsMonoBehaviour, IInitializable
 
 	private void FindAllPlayersInScene()
 	{
-		this.AllPlayersInScene = FindObjectsOfType<PlayerData>();
+		this.AllPlayersInScene = FindObjectsOfType<PlayerData>().OrderBy(x => x.PlayerId).ToArray();
 	}
 
 	private void FindClientPlayerInScene()
