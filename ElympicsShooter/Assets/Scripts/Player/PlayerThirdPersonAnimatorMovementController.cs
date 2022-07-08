@@ -10,6 +10,8 @@ public class PlayerThirdPersonAnimatorMovementController : MonoBehaviour
 
 	private readonly int movementForwardParameterHash = Animator.StringToHash("MovementForward");
 	private readonly int movementRightParameterHash = Animator.StringToHash("MovementRight");
+	private readonly int jumpingTriggerParameterHash = Animator.StringToHash("JumpTrigger");
+	private readonly int isGroundedParameterHash = Animator.StringToHash("IsGrounded");
 
 	private Animator thirdPersonAnimator = null;
 
@@ -18,6 +20,19 @@ public class PlayerThirdPersonAnimatorMovementController : MonoBehaviour
 		thirdPersonAnimator = GetComponent<Animator>();
 
 		playerMovementController.MovementValuesChanged += ProcessMovementValues;
+		playerMovementController.PlayerJumped += ProcessJumping;
+		playerMovementController.IsGroundedStateUpdate += ProcessIsGroundedStateUpdate;
+	}
+
+	private void ProcessIsGroundedStateUpdate(bool isGrounded)
+	{
+		thirdPersonAnimator.SetBool(isGroundedParameterHash, isGrounded);
+	}
+
+	private void ProcessJumping()
+	{
+		Debug.Log("Process Jumping");
+		thirdPersonAnimator.SetTrigger(jumpingTriggerParameterHash);
 	}
 
 	private void ProcessMovementValues(Vector3 movementDirection)

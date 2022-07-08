@@ -18,10 +18,11 @@ public class MovementController : ElympicsMonoBehaviour
 
 	private new Rigidbody rigidbody = null;
 
-	public bool IsGrounded => Physics.Raycast(transform.position + new Vector3(0, 0.05f, 0), Vector3.down, 0.1f);
+	private bool IsGrounded() => Physics.Raycast(transform.position + new Vector3(0, 0.05f, 0), Vector3.down, 0.1f);
 
 	public event Action<Vector3> MovementValuesChanged;
 	public event Action PlayerJumped;
+	public event Action<bool> IsGroundedStateUpdate;
 
 	private void Awake()
 	{
@@ -48,7 +49,10 @@ public class MovementController : ElympicsMonoBehaviour
 
 		ApplyMovement(movementDirection);
 
-		if (jump && IsGrounded)
+		var isGrounded = IsGrounded();
+		IsGroundedStateUpdate.Invoke(isGrounded);
+
+		if (jump && isGrounded)
 			ApplyJump();
 	}
 
