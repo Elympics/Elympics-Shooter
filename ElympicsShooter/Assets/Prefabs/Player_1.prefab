@@ -55,6 +55,14 @@ PrefabInstance:
       propertyPath: predictableFor.playerIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6317083636918909591, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317083636918909591, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: predictableFor.playerIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6765057966925682971, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
       value: 11
@@ -113,7 +121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8687269955033791109, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
-      value: 18
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 8687269955033791109, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: predictableFor.playerIndex
