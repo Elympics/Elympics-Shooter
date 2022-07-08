@@ -11,6 +11,10 @@ This repository is a *free* FPS shooter template. It is meant to be a learning r
 
 > Feel free to grab this source code and use it as a basis for your own projects.
 
+> __IMPORTANT__: 
+> This project uses Git Large Files Support (LFS). Downloading this repository in a zip file **will not work**. You need to clone this repo using `git clone` with LFS.
+> You can download Git LFS here: https://git-lfs.github.com/.
+
 ## How to use it?
 
 - Launch this project in Unity
