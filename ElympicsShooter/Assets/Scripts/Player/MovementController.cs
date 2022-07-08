@@ -18,7 +18,10 @@ public class MovementController : ElympicsMonoBehaviour
 
 	private new Rigidbody rigidbody = null;
 
-	private bool IsGrounded => Physics.Raycast(transform.position + new Vector3(0, 0.05f, 0), Vector3.down, 0.1f);
+	public bool IsGrounded => Physics.Raycast(transform.position + new Vector3(0, 0.05f, 0), Vector3.down, 0.1f);
+
+	public event Action<Vector3> MovementValuesChanged;
+	public event Action PlayerJumped;
 
 	private void Awake()
 	{
@@ -52,6 +55,7 @@ public class MovementController : ElympicsMonoBehaviour
 	private void ApplyJump()
 	{
 		rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+		PlayerJumped?.Invoke();
 	}
 
 	private void ApplyMovement(Vector3 movementDirection)
@@ -60,5 +64,7 @@ public class MovementController : ElympicsMonoBehaviour
 		Vector3 fixedVelocity = Vector3.MoveTowards(rigidbody.velocity, defaultVelocity, Elympics.TickDuration * acceleration);
 
 		rigidbody.velocity = new Vector3(fixedVelocity.x, rigidbody.velocity.y, fixedVelocity.z);
+
+		MovementValuesChanged?.Invoke(movementDirection);
 	}
 }
