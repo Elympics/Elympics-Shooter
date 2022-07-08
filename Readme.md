@@ -13,7 +13,30 @@ This repository is a *free* FPS shooter template. It is meant to be a learning r
 
 ## How to use it?
 
-> Please fill it out here
+- Launch this project in Unity
+- Packages (including Elympcis) will download
+- Run it using [local mode](https://docs.elympics.cc/getting-started/run-locally/), or try the [half remote](https://docs.elympics.cc/getting-started/run-locally/#half-remote-mode) option
+- You'll also be able to play it online in the browser [here](https://shooter-demo.elympics.cc/)
+
+## Features
+
+> These features will be implemented and documented on our blog as well.
+
+| Feature | Implementation | Documentation |
+|---------|:--------------:|:-------------:|
+| Character movement | ✅ | 👨‍💻 |
+| Jumping | ✅ | 👨‍💻 |
+| Weapon projectile 🔫 | ✅ | 👨‍💻 |
+| Weapon raycast 🔦 | ✅ | ⛔️ |
+| Weapon switching ♼ | ✅ | ⛔️ |
+| Dealing damage 💥 | ✅ | ⛔️ |
+| Player HP system | ✅ | ⛔️ |
+| Player respawn 💆‍♂️ | ✅ | ⛔️ |
+| Match phase synchronization (start and finish based on predefined criteria) | ✅ | ⛔️ |
+| Basic HUD display 🖥 | ✅ | ⛔️ |
+| Kill cam 🎥 | ✅ | ⛔️ |
+| Character animation synchronized 🏃‍♀️ | ⛔️ | ⛔️ |
+| Kill implementation 💀 | ⛔️ | ⛔️ |
 
 ## Delivery
 
