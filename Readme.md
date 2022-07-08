@@ -31,11 +31,11 @@ This repository is a *free* FPS shooter template. It is meant to be a learning r
 | Weapon switching ♼ | ✅ | ⛔️ |
 | Dealing damage 💥 | ✅ | ⛔️ |
 | Player HP system | ✅ | ⛔️ |
-| Player respawn 💆‍♂️ | ✅ | ⛔️ |
+| Player respawn 💆 | ✅ | ⛔️ |
 | Match phase synchronization (start and finish based on predefined criteria) | ✅ | ⛔️ |
 | Basic HUD display 🖥 | ✅ | ⛔️ |
 | Kill cam 🎥 | ✅ | ⛔️ |
-| Character animation synchronized 🏃‍♀️ | ⛔️ | ⛔️ |
+| Character animation synchronized 🏃 | ⛔️ | ⛔️ |
 | Kill implementation 💀 | ⛔️ | ⛔️ |
 
 ## Delivery
