@@ -24,6 +24,8 @@ public class MovementController : ElympicsMonoBehaviour
 	public event Action PlayerJumped;
 	public event Action<bool> IsGroundedStateUpdate;
 
+	private bool jumpLockedByButtonHold = false;
+
 	private void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody>();
@@ -49,16 +51,30 @@ public class MovementController : ElympicsMonoBehaviour
 
 		ApplyMovement(movementDirection);
 
+		ProcessJumping(jump);
+	}
+
+	private void ProcessJumping(bool jump)
+	{
 		var isGrounded = IsGrounded();
 		IsGroundedStateUpdate.Invoke(isGrounded);
 
-		if (jump && isGrounded)
-			ApplyJump();
+		if (jump)
+		{
+			if (isGrounded && !jumpLockedByButtonHold)
+				ApplyJump();
+		}
+		else
+		{
+			jumpLockedByButtonHold = false;
+		}
 	}
 
 	private void ApplyJump()
 	{
 		rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+		jumpLockedByButtonHold = true;
+
 		PlayerJumped?.Invoke();
 	}
 

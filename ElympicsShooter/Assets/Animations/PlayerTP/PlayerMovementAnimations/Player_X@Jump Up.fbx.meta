@@ -39,7 +39,7 @@ ModelImporter:
       name: Jump Up
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
+      firstFrame: 20
       lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0

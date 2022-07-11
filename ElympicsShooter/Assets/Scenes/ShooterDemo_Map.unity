@@ -902,6 +902,7 @@ MonoBehaviour:
   networkId: 15
   predictableFor:
     playerIndex: -2
+  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -1759,6 +1760,7 @@ MonoBehaviour:
   networkId: 2
   predictableFor:
     playerIndex: -2
+  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -3116,6 +3118,7 @@ MonoBehaviour:
   networkId: 1
   predictableFor:
     playerIndex: -2
+  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -4790,9 +4793,25 @@ PrefabInstance:
       propertyPath: playersProvider
       value: 
       objectReference: {fileID: 794887477}
+    - target: {fileID: 1543795651137908087, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: _triggersStatuses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543795651137908087, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: _triggersStatuses.Array.data[0].Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543795651137908087, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: _triggersStatuses.Array.data[0].Updated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1543795651137908087, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: _triggersStatuses.Array.data[0].HashName
+      value: 113680519
+      objectReference: {fileID: 0}
     - target: {fileID: 1784972098564503959, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9932773
+      value: 1.1042017
       objectReference: {fileID: 0}
     - target: {fileID: 2007163166125340341, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: gameController
@@ -4808,7 +4827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3383110756971529387, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9932773
+      value: 1.1042017
       objectReference: {fileID: 0}
     - target: {fileID: 5179770150666763226, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
@@ -4876,7 +4895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8374349575418976621, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: jumpForce
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8374349575418976621, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: movementSpeed
@@ -5033,6 +5052,7 @@ MonoBehaviour:
   networkId: 9
   predictableFor:
     playerIndex: -2
+  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -5140,13 +5160,29 @@ PrefabInstance:
       propertyPath: networkId
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 293558014090351471, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: _triggersStatuses.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 293558014090351471, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: _triggersStatuses.Array.data[0].Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 293558014090351471, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: _triggersStatuses.Array.data[0].Updated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 293558014090351471, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: _triggersStatuses.Array.data[0].HashName
+      value: 113680519
+      objectReference: {fileID: 0}
     - target: {fileID: 300943769056436037, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: playersProvider
       value: 
       objectReference: {fileID: 794887477}
     - target: {fileID: 701218114182219663, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9932773
+      value: 1.1042017
       objectReference: {fileID: 0}
     - target: {fileID: 766918988116199597, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: gameController
@@ -5170,7 +5206,7 @@ PrefabInstance:
       objectReference: {fileID: 239820315}
     - target: {fileID: 4579454717005560499, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9932773
+      value: 1.1042017
       objectReference: {fileID: 0}
     - target: {fileID: 5103861076034241679, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: networkId
@@ -5242,7 +5278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7298626438964946805, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: jumpForce
-      value: 2.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7298626438964946805, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: movementSpeed
