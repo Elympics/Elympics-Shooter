@@ -4888,6 +4888,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 6317083636918909591, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: networkId
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 6765057966925682972, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5263,6 +5267,10 @@ PrefabInstance:
       propertyPath: gameStateController
       value: 
       objectReference: {fileID: 239820315}
+    - target: {fileID: 4490860294935196408, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: networkId
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 4579454717005560499, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
       value: 1.8241206
@@ -5334,6 +5342,10 @@ PrefabInstance:
     - target: {fileID: 6240996226308031938, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: networkId
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489865005623731892, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
+      propertyPath: networkId
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7298626438964946805, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: jumpForce
