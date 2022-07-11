@@ -116,7 +116,6 @@ MonoBehaviour:
   networkId: 20000106
   predictableFor:
     playerIndex: 0
-  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -313,7 +312,6 @@ MonoBehaviour:
   networkId: 10
   predictableFor:
     playerIndex: 0
-  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -834,7 +832,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.879397, y: 1}
+    m_SensorSize: {x: 1.8241206, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -876,7 +874,6 @@ MonoBehaviour:
   networkId: 20000105
   predictableFor:
     playerIndex: 0
-  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
@@ -951,7 +948,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.879397, y: 1}
+    m_SensorSize: {x: 1.8241206, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1624,6 +1621,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -2736412726467936281, guid: 5b06f3f66271738428eeab80999cba69, type: 3}
   m_PrefabInstance: {fileID: 6549890524372089972}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &833015381137654245 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 5b06f3f66271738428eeab80999cba69, type: 3}
+  m_PrefabInstance: {fileID: 6549890524372089972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1852263954868378523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4372587343206045713, guid: 5b06f3f66271738428eeab80999cba69, type: 3}
@@ -1659,8 +1661,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb626bba4c63ef54fb314cfab4220d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disabledParameters: []
-  disabledLayers: []
+  ShowLayerWeights: 1
+  ShowParameters: 1
+  _boolStatuses:
+  - HashName: 507951781
+    Enabled: 1
+    Updated: 1
+  _intStatuses: []
+  _floatStatuses:
+  - HashName: 888836411
+    Enabled: 1
+    Updated: 1
+  - HashName: 1132334820
+    Enabled: 1
+    Updated: 1
+  - HashName: 302144437
+    Enabled: 1
+    Updated: 1
+  _triggersStatuses:
+  - HashName: 113680519
+    Enabled: 1
+    Updated: 1
+  _layersStatuses:
+  - Index: 0
+    Enabled: 1
+    Updated: 1
+  - Index: 1
+    Enabled: 1
+    Updated: 1
 --- !u!114 &2837944358114961850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1676,7 +1704,8 @@ MonoBehaviour:
   firstPersonViewContainer: {fileID: 2752692582429041278}
   rotatingBone: {fileID: 64085744949396371}
   lookAtTarget: {fileID: 5182045631132065678}
-  rotationCorrection: {x: 1.5, y: 55, z: -5}
+  animator: {fileID: 833015381137654245}
+  rotationCorrection: {x: 0, y: 0, z: 0}
 --- !u!114 &6317083636918909591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,10 +1719,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 30
+  networkId: 32
   predictableFor:
     playerIndex: 0
-  isUpdatableForNonOwners: 0
   visibleFor:
     playerIndex: -3
   stateFrequencyStages:
