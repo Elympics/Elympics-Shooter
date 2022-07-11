@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Elympics;
+using System;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerData))]
 public class PlayerRenderersVisibilityController : ElympicsMonoBehaviour, IInitializable
@@ -29,19 +31,19 @@ public class PlayerRenderersVisibilityController : ElympicsMonoBehaviour, IIniti
 	{
 		foreach (GameObject rootOfRenderersToDisable in rootsOfRenderersToDisable)
 		{
-			var renderersInChildren = rootOfRenderersToDisable.GetComponentsInChildren<Renderer>();
+			var rendererObjectsInChildren = Array.ConvertAll(rootOfRenderersToDisable.GetComponentsInChildren<Renderer>(true), x => x.gameObject);
+			SetGivenObjectsLayer(rendererObjectsInChildren, layerName);
 
-			SetLayerToRenderers(renderersInChildren, layerName);
+			rendererObjectsInChildren = Array.ConvertAll(rootOfRenderersToDisable.GetComponentsInChildren<Graphic>(true), x => x.gameObject);
+			SetGivenObjectsLayer(rendererObjectsInChildren, layerName);
 		}
 	}
 
-
-	private void SetLayerToRenderers(Renderer[] renderersToDisable, string layerName)
+	private void SetGivenObjectsLayer(GameObject[] objectsToChangeLayer, string layerName)
 	{
-		foreach (Renderer renderer in renderersToDisable)
+		foreach (GameObject objectToChangeLayer in objectsToChangeLayer)
 		{
-			Debug.Log(layerName);
-			renderer.gameObject.layer = LayerMask.NameToLayer(layerName);
+			objectToChangeLayer.layer = LayerMask.NameToLayer(layerName);
 		}
 	}
 }
