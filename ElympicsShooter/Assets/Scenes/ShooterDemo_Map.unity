@@ -3403,6 +3403,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: b47e3bba032b35441a80e6b384d61baf, type: 3}
   m_PrefabInstance: {fileID: 475190990}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &836268167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3836440747136360806, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+  m_PrefabInstance: {fileID: 1381929155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &836268169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836268167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b382d63b93bdf4bbeda8299ce4a906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPositionConfig:
+    synchronizationEnabled: 1
+    tolerance: 0.01
+  localScaleConfig:
+    synchronizationEnabled: 1
+    tolerance: 0.01
+  localRotationConfig:
+    synchronizationEnabled: 1
+    tolerance: 1
+--- !u!114 &836268170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836268167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334c2a3facb248ac8c1a599797c52dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceNetworkId: 0
+  networkId: 27
+  predictableFor:
+    playerIndex: -2
+  isUpdatableForNonOwners: 0
+  visibleFor:
+    playerIndex: -3
+  stateFrequencyStages:
+  - stageDurationInMiliseconds: 500
+    frequencyInMiliseconds: 30
+    maxStageDurationInMiliseconds: 5000
+  - stageDurationInMiliseconds: 1000
+    frequencyInMiliseconds: 200
+    maxStageDurationInMiliseconds: 5000
+  - stageDurationInMiliseconds: 1000
+    frequencyInMiliseconds: 1000
+    maxStageDurationInMiliseconds: 5000
 --- !u!1001 &846023213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4811,7 +4866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1784972098564503959, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.1042017
+      value: 1.0184875
       objectReference: {fileID: 0}
     - target: {fileID: 2007163166125340341, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: gameController
@@ -4827,7 +4882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3383110756971529387, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.1042017
+      value: 1.0184875
       objectReference: {fileID: 0}
     - target: {fileID: 5179770150666763226, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
@@ -5182,7 +5237,7 @@ PrefabInstance:
       objectReference: {fileID: 794887477}
     - target: {fileID: 701218114182219663, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.1042017
+      value: 1.0184875
       objectReference: {fileID: 0}
     - target: {fileID: 766918988116199597, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: gameController
@@ -5206,7 +5261,7 @@ PrefabInstance:
       objectReference: {fileID: 239820315}
     - target: {fileID: 4579454717005560499, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.1042017
+      value: 1.0184875
       objectReference: {fileID: 0}
     - target: {fileID: 5103861076034241679, guid: 1a32878ec178b454db33f08da46233bd, type: 3}
       propertyPath: networkId
