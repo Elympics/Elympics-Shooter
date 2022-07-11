@@ -10,7 +10,8 @@ using Cinemachine;
 public class RailGunVisuals : ElympicsMonoBehaviour
 {
 	[Header("References:")]
-	[SerializeField] private Image[] loadingBars = null;
+	[SerializeField] private Image loadingBar = null;
+	[SerializeField] private Canvas loadingBarCanvasRoot = null;
 	[SerializeField] private Transform bulletSpawnPoint = null;
 	[SerializeField] private LineRenderer trailRendererPrefab = null;
 	[SerializeField] private CinemachineVirtualCamera cinemachinePlayerCamera = null;
@@ -34,6 +35,16 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 
 		railRenderPoints.Values[0].ValueChanged += UpdateLineRendererPoints;
 		railRenderPoints.Values[1].ValueChanged += UpdateLineRendererPoints;
+
+		DisableLoadingBarsIfItsNotElympicsClient();
+	}
+
+	private void DisableLoadingBarsIfItsNotElympicsClient()
+	{
+		if (PredictableFor != Elympics.Player)
+		{
+			loadingBarCanvasRoot.gameObject.SetActive(false);
+		}
 	}
 
 	private void UpdateLineRendererPoints(Vector3 lastValue, Vector3 newValue)
@@ -74,8 +85,7 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 	{
 		var fillAmountvalue = currentLoadingValue / maxLoadingValue;
 
-		foreach (Image loadingBar in loadingBars)
-			loadingBar.fillAmount = fillAmountvalue;
+		loadingBar.fillAmount = fillAmountvalue;
 	}
 
 	private IEnumerator TrailDeathTimer()
