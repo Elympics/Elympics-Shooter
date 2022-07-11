@@ -18,7 +18,6 @@ public class PlayerThirdPersonAnimatorMovementController : MonoBehaviour
 	private void Awake()
 	{
 		thirdPersonAnimator = GetComponent<Animator>();
-
 		playerMovementController.MovementValuesChanged += ProcessMovementValues;
 		playerMovementController.PlayerJumped += ProcessJumping;
 		playerMovementController.IsGroundedStateUpdate += ProcessIsGroundedStateUpdate;
@@ -31,7 +30,6 @@ public class PlayerThirdPersonAnimatorMovementController : MonoBehaviour
 
 	private void ProcessJumping()
 	{
-		Debug.Log("Process Jumping");
 		thirdPersonAnimator.SetTrigger(jumpingTriggerParameterHash);
 	}
 
