@@ -13,11 +13,9 @@ public class LoadoutController : ElympicsMonoBehaviour, IInitializable, IUpdatab
 	[Header("Parameters:")]
 	[SerializeField] private float weaponSwapTime = 0.3f;
 
-	public event Action WeaponSwapped = null;
+	public ElympicsInt CurrentEquipedWeaponIndex { get; } = new ElympicsInt(0);
 
-	private ElympicsInt currentEquipedWeaponIndex = new ElympicsInt(0);
 	private ElympicsFloat currentWeaponSwapTime = null;
-
 	private Weapon currentEquipedWeapon = null;
 
 	public void Initialize()
@@ -26,8 +24,8 @@ public class LoadoutController : ElympicsMonoBehaviour, IInitializable, IUpdatab
 
 		DisableAllWeapons();
 
-		currentEquipedWeaponIndex.ValueChanged += UpdateCurrentEquipedWeaponByIndex;
-		UpdateCurrentEquipedWeaponByIndex(currentEquipedWeaponIndex, 0);
+		CurrentEquipedWeaponIndex.ValueChanged += UpdateCurrentEquipedWeaponByIndex;
+		UpdateCurrentEquipedWeaponByIndex(CurrentEquipedWeaponIndex, 0);
 	}
 
 	private void DisableAllWeapons()
@@ -41,7 +39,7 @@ public class LoadoutController : ElympicsMonoBehaviour, IInitializable, IUpdatab
 		if (deathController.IsDead)
 			return;
 
-		if (weaponIndex != -1 && weaponIndex != currentEquipedWeaponIndex)
+		if (weaponIndex != -1 && weaponIndex != CurrentEquipedWeaponIndex)
 		{
 			SwitchWeapon(weaponIndex);
 		}
@@ -65,7 +63,7 @@ public class LoadoutController : ElympicsMonoBehaviour, IInitializable, IUpdatab
 
 	public void SwitchWeapon(int weaponIndex)
 	{
-		currentEquipedWeaponIndex.Value = weaponIndex;
+		CurrentEquipedWeaponIndex.Value = weaponIndex;
 	}
 
 	private void UpdateCurrentEquipedWeaponByIndex(int lastValue, int newValue)
@@ -77,8 +75,6 @@ public class LoadoutController : ElympicsMonoBehaviour, IInitializable, IUpdatab
 		currentEquipedWeapon.SetIsActive(true);
 
 		currentWeaponSwapTime.Value = 0.0f;
-
-		WeaponSwapped?.Invoke();
 	}
 
 	public void ElympicsUpdate()
