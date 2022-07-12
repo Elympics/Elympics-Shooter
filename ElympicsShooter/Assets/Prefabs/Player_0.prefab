@@ -703,6 +703,7 @@ GameObject:
   - component: {fileID: 4211829064908990230}
   - component: {fileID: 7944978125456034809}
   - component: {fileID: 2276956635374690471}
+  - component: {fileID: 6180682213438589184}
   m_Layer: 7
   m_Name: HandsRoot
   m_TagString: Untagged
@@ -761,6 +762,19 @@ MonoBehaviour:
   handsRootAnimator: {fileID: 7944978125456034809}
   playerHandsAnimator: {fileID: 6824435532142009837}
   loadoutController: {fileID: 6232224650815086707}
+--- !u!114 &6180682213438589184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8081256620278593452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8d17d7971c83b49835463ba40416a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovementController: {fileID: 8374349575418976621}
 --- !u!1 &8246710165483781537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1469,10 @@ PrefabInstance:
     - target: {fileID: -7408262227084694985, guid: d867bcac8fed5144ca3aa10a723cd1cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -67.29227
+      objectReference: {fileID: 0}
+    - target: {fileID: -7252228434403314338, guid: d867bcac8fed5144ca3aa10a723cd1cf, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6901763395575906384, guid: d867bcac8fed5144ca3aa10a723cd1cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2191,6 +2209,10 @@ PrefabInstance:
     - target: {fileID: 1628164375818249098, guid: d867bcac8fed5144ca3aa10a723cd1cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 60.201572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630794972795428178, guid: d867bcac8fed5144ca3aa10a723cd1cf, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1772898423257597258, guid: d867bcac8fed5144ca3aa10a723cd1cf, type: 3}
       propertyPath: m_Layer
