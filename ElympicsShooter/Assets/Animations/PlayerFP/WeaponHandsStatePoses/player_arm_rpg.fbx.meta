@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 6b0b4457d0b2ccc478d402c3b50c7d19
+guid: c8d8a09ff8510544c97e5fa23fc83810
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -1978303741906493279
-    second: Armature|idle
+      74: 4084113550970173757
+    second: Armature|Armature|Armature|idle|Armature|idle
   externalObjects: {}
   materials:
     materialImportMode: 2

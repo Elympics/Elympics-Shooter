@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "a055bcc2504405073b217c3322c5d92e5c38f72f"
+      "hash": "8db6240a1b41aaec211f01d316086e3c94922447"
     },
     "com.daftmobile.web3kit": {
       "version": "https://github.com/Elympics/Unity-Web3-Kit.git",
