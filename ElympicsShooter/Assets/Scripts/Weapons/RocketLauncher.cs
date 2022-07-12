@@ -21,6 +21,8 @@ public class RocketLauncher : Weapon
 		bullet.GetComponent<ProjectileBullet>().Launch(bulletSpawnPoint.transform.forward);
 
 		showExplosionPS?.Play();
+
+		WeaponShot?.Invoke();
 	}
 
 	private void Update()

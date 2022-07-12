@@ -54,6 +54,7 @@ public class RailGun : Weapon
 		}
 
 		WeaponFired?.Invoke(hit);
+		WeaponShot?.Invoke();
 
 		ChangeCurrentLoadingTime(0.0f);
 		isLoadingToShot.Value = false;

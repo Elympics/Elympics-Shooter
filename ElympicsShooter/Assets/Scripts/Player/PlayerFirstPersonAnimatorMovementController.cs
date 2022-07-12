@@ -9,8 +9,8 @@ public class PlayerFirstPersonAnimatorMovementController : MonoBehaviour
 	[SerializeField] private MovementController playerMovementController;
 
 	private readonly int movementSpeedParameterHash = Animator.StringToHash("MovementSpeed");
-	//private readonly int jumpingTriggerParameterHash = Animator.StringToHash("JumpTrigger");
-	//private readonly int isGroundedParameterHash = Animator.StringToHash("IsGrounded");
+	private readonly int jumpingTriggerParameterHash = Animator.StringToHash("JumpTrigger");
+	private readonly int isGroundedParameterHash = Animator.StringToHash("IsGrounded");
 
 	private Animator firstPersonAnimator = null;
 
@@ -24,20 +24,18 @@ public class PlayerFirstPersonAnimatorMovementController : MonoBehaviour
 
 	private void ProcessIsGroundedStateUpdate(bool isGrounded)
 	{
-		//firstPersonAnimator.SetBool(isGroundedParameterHash, isGrounded);
+		firstPersonAnimator.SetBool(isGroundedParameterHash, isGrounded);
 	}
 
 	private void ProcessJumping()
 	{
-		//firstPersonAnimator.SetTrigger(jumpingTriggerParameterHash);
+		firstPersonAnimator.SetTrigger(jumpingTriggerParameterHash);
 	}
 
 	private void ProcessMovementValues(Vector3 movementDirection)
 	{
 		var speed = movementDirection.magnitude;
-		Debug.Log(speed);
 
-		//firstPersonAnimator.SetFloat(movementForwardParameterHash, localMovementDirection.z);
 		firstPersonAnimator.SetFloat(movementSpeedParameterHash, speed);
 	}
 }

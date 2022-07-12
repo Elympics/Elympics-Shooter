@@ -1,4 +1,5 @@
 using Elympics;
+using System;
 using UnityEngine;
 
 public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
@@ -6,6 +7,8 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 	[SerializeField] protected float damage = 0.0f;
 	[SerializeField] [Tooltip("Shots per minute")] protected float fireRate = 60.0f;
 	[SerializeField] private GameObject meshContainer = null;
+
+	public Action WeaponShot = null;
 
 	protected ElympicsFloat currentTimeBetweenShoots = new ElympicsFloat();
 
