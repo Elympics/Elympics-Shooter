@@ -19,6 +19,13 @@ public class RailGun : Weapon
 	public event Action<float, float> LoadingTimeChanged;
 	public event Action<RaycastHit> WeaponFired;
 
+	public override void Initialize()
+	{
+		base.Initialize();
+
+		currentLoadingTime.ValueChanged += HandleCurrentLoadingTimeChanged;
+	}
+
 	protected override void ProcessWeaponAction()
 	{
 		if (isLoadingToShot)
@@ -34,11 +41,18 @@ public class RailGun : Weapon
 
 		if (isLoadingToShot)
 		{
-			ChangeCurrentLoadingTime(currentLoadingTime.Value + Elympics.TickDuration);
-
-			if (currentLoadingTime >= loadingTime)
-				ProcessRayShot();
+			if (currentLoadingTime.Value >= loadingTime)
+				ChangeCurrentLoadingTime(0.0f);
+			else
+				ChangeCurrentLoadingTime(currentLoadingTime.Value + Elympics.TickDuration);
 		}
+	}
+
+	private void HandleCurrentLoadingTimeChanged(float lastValue, float newValue)
+	{
+		Debug.Log($"{lastValue} {newValue}");
+		if (lastValue >= loadingTime && newValue < loadingTime)
+			ProcessRayShot();
 	}
 
 	private void ProcessRayShot()
@@ -56,8 +70,8 @@ public class RailGun : Weapon
 		WeaponFired?.Invoke(hit);
 		WeaponShot?.Invoke();
 
-		ChangeCurrentLoadingTime(0.0f);
 		isLoadingToShot.Value = false;
+		LoadingTimeChanged?.Invoke(0, loadingTime);
 	}
 
 	public override void SetIsActive(bool isActive)

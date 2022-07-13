@@ -34,6 +34,9 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 	{
 		rigidbodyIsKinematic.ValueChanged += UpdateRigidbodyIsKinematic;
 		colliderEnabled.ValueChanged += UpdateColliderEnabled;
+
+		markedAsReadyToDestroy.ValueChanged += DestroyProjectile;
+		readyToLaunchExplosion.ValueChanged += DetonateProjectile;
 	}
 
 	private void UpdateColliderEnabled(bool lastValue, bool newValue)
@@ -65,16 +68,10 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 		rigidbody.velocity = direction * speed;
 	}
 
-	private IEnumerator SelfDestoryTimer(float time)
+	private void DestroyProjectile(bool lastValue, bool newValue)
 	{
-		yield return new WaitForSeconds(time);
-
-		DestroyProjectile();
-	}
-
-	private void DestroyProjectile()
-	{
-		markedAsReadyToDestroy.Value = true;
+		if (newValue)
+			ElympicsDestroy(this.gameObject);
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -86,27 +83,23 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 		if (collision.transform.root.gameObject == owner.Value.gameObject)
 			return;
 
-		DetonateProjectile();
+		readyToLaunchExplosion.Value = true;
 	}
 
-	private void DetonateProjectile()
+	private void DetonateProjectile(bool lastValue, bool newValue)
 	{
-		readyToLaunchExplosion.Value = true;
+		if (newValue)
+			LaunchExplosion();
 	}
 
 	public void ElympicsUpdate()
 	{
-		if (readyToLaunchExplosion.Value && !bulletExploded)
-			LaunchExplosion();
-		if (markedAsReadyToDestroy.Value)
-			ElympicsDestroy(this.gameObject);
-
 		deathTimer.Value += Elympics.TickDuration;
 
 		if ((!bulletExploded && deathTimer >= lifeTime)
 			|| (bulletExploded && deathTimer >= timeToDestroyOnExplosion))
 		{
-			DestroyProjectile();
+			markedAsReadyToDestroy.Value = true;
 		}
 	}
 

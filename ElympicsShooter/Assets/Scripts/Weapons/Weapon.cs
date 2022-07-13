@@ -19,7 +19,7 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 
 	public GameObject Owner => this.transform.root.gameObject;
 
-	public void Initialize()
+	public virtual void Initialize()
 	{
 		CalculateTimeBetweenShoots();
 	}
