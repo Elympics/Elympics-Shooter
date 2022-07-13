@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: themeColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 250967938, guid: ae807096dc5026c448b1731d823d179a, type: 3}
+      propertyPath: themeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 92d3a1245c9172141af52fc2541d99f3, type: 2}
     - target: {fileID: 978054953920868353, guid: ae807096dc5026c448b1731d823d179a, type: 3}
       propertyPath: networkId
       value: 61

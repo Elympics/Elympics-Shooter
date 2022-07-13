@@ -12,7 +12,6 @@ public class InputController : ElympicsMonoBehaviour, IInputHandler, IInitializa
 	[SerializeField] private LoadoutController loadoutController = null;
 	[SerializeField] private HUDController hudController = null;
 	[SerializeField] private PlayerData playerData = null;
-	[SerializeField] private PlayerScoresManager playerScoresManager = null;
 	[SerializeField] private GameStateController gameController = null;
 
 	private InputProvider inputProvider = null;

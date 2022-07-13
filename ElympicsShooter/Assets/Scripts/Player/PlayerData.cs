@@ -8,6 +8,7 @@ public class PlayerData : MonoBehaviour
 	[SerializeField] private int playerId = 0;
 	[SerializeField] private string nickname = "";
 	[SerializeField] private Color themeColor = Color.white;
+	[SerializeField] private Material themeMaterial = null;
 
 	[Header("References:")]
 	[SerializeField] private StatsController statsController = null;
@@ -16,6 +17,7 @@ public class PlayerData : MonoBehaviour
 	public int PlayerId => playerId;
 	public string Nickname => nickname;
 	public Color ThemeColor => themeColor;
+	public Material ThemeMaterial => themeMaterial;
 	public DeathController DeathController => deathController;
 	public StatsController StatsController => statsController;
 }

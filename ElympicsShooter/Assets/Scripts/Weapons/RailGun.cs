@@ -50,7 +50,6 @@ public class RailGun : Weapon
 
 	private void HandleCurrentLoadingTimeChanged(float lastValue, float newValue)
 	{
-		Debug.Log($"{lastValue} {newValue}");
 		if (lastValue >= loadingTime && newValue < loadingTime)
 			ProcessRayShot();
 	}
