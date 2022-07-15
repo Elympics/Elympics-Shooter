@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class HealthBar : MonoBehaviour
 {
 	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private Slider healthSlider = null;
+	[SerializeField] private TextMeshProUGUI healthCurrentValue = null;
 
 	private void Start()
 	{
@@ -20,11 +22,13 @@ public class HealthBar : MonoBehaviour
 	private void SubscribeToStatsController()
 	{
 		var clientPlayerData = playersProvider.ClientPlayer;
-		clientPlayerData.StatsController.HealthValueChanged += UpdateHealthBarView;
+		clientPlayerData.StatsController.HealthValueChanged += UpdateHealthView;
 	}
 
-	private void UpdateHealthBarView(float currentHealth, float maxHealth)
+	private void UpdateHealthView(float currentHealth, float maxHealth)
 	{
+		healthCurrentValue.text = Mathf.Round(currentHealth).ToString();
+
 		healthSlider.value = currentHealth / maxHealth;
 	}
 }
