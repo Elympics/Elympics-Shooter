@@ -13,6 +13,7 @@ public class PlayerData : MonoBehaviour
 	[Header("References:")]
 	[SerializeField] private StatsController statsController = null;
 	[SerializeField] private DeathController deathController = null;
+	[SerializeField] private LoadoutController loadoutController = null;
 
 	public int PlayerId => playerId;
 	public string Nickname => nickname;
@@ -20,4 +21,5 @@ public class PlayerData : MonoBehaviour
 	public Material ThemeMaterial => themeMaterial;
 	public DeathController DeathController => deathController;
 	public StatsController StatsController => statsController;
+	public LoadoutController LoadoutController => loadoutController;
 }
