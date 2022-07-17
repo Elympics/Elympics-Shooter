@@ -3139,6 +3139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovementController: {fileID: 8374349575418976621}
+  playerDeathController: {fileID: 978363736352741455}
 --- !u!114 &1543795651137908087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3167,6 +3168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatingBone: {fileID: 64085744949396371}
   lookAtTarget: {fileID: 5182045631132065678}
+  deathController: {fileID: 978363736352741455}
 --- !u!114 &5262183221468045758
 MonoBehaviour:
   m_ObjectHideFlags: 0

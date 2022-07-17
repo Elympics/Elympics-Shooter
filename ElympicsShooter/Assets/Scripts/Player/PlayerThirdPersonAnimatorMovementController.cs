@@ -7,10 +7,13 @@ using UnityEngine;
 public class PlayerThirdPersonAnimatorMovementController : MonoBehaviour
 {
 	[SerializeField] private MovementController playerMovementController;
+	[SerializeField] private DeathController playerDeathController;
 
 	private readonly int movementForwardParameterHash = Animator.StringToHash("MovementForward");
 	private readonly int movementRightParameterHash = Animator.StringToHash("MovementRight");
 	private readonly int jumpingTriggerParameterHash = Animator.StringToHash("JumpTrigger");
+	private readonly int deathTriggerParameterHash = Animator.StringToHash("DeathTrigger");
+	private readonly int resetTriggerParameterHash = Animator.StringToHash("ResetTrigger");
 	private readonly int isGroundedParameterHash = Animator.StringToHash("IsGrounded");
 
 	private Animator thirdPersonAnimator = null;
@@ -21,6 +24,19 @@ public class PlayerThirdPersonAnimatorMovementController : MonoBehaviour
 		playerMovementController.MovementValuesChanged += ProcessMovementValues;
 		playerMovementController.PlayerJumped += ProcessJumping;
 		playerMovementController.IsGroundedStateUpdate += ProcessIsGroundedStateUpdate;
+		playerDeathController.IsDead.ValueChanged += ProcessDeathState;
+	}
+
+	private void ProcessDeathState(bool lastValue, bool newValue)
+	{
+		if (newValue)
+		{
+			thirdPersonAnimator.SetTrigger(deathTriggerParameterHash);
+		}
+		else
+		{
+			thirdPersonAnimator.SetTrigger(resetTriggerParameterHash);
+		}
 	}
 
 	private void ProcessIsGroundedStateUpdate(bool isGrounded)
