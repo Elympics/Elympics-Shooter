@@ -33,7 +33,11 @@ public class RocketLauncher : Weapon
 	private GameObject CreateBullet()
 	{
 		var bullet = ElympicsInstantiate(bulletPrefab.gameObject.name, ElympicsPlayer.FromIndex(Owner.GetComponent<PlayerData>().PlayerId));
-		bullet.GetComponent<ProjectileBullet>().SetOwner(Owner.gameObject.transform.root.gameObject.GetComponent<ElympicsBehaviour>());
+
+		var projectileBullet = bullet.GetComponent<ProjectileBullet>();
+
+		projectileBullet.SetOwner(Owner.gameObject.transform.root.gameObject.GetComponent<ElympicsBehaviour>());
+		projectileBullet.SetApplyingDamageCallback(WeaponAppliedDamage);
 
 		return bullet;
 	}

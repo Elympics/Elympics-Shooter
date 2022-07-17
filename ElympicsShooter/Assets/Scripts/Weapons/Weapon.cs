@@ -9,6 +9,7 @@ public abstract class Weapon : ElympicsMonoBehaviour, IInitializable, IUpdatable
 	[SerializeField] private GameObject meshContainer = null;
 
 	public Action WeaponShot = null;
+	public Action WeaponAppliedDamage = null;
 
 	protected ElympicsFloat currentTimeBetweenShoots = new ElympicsFloat();
 

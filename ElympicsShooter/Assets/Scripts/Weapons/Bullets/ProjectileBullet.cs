@@ -29,6 +29,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 	private ElympicsGameObject owner = new ElympicsGameObject();
 	private ElympicsFloat deathTimer = new ElympicsFloat(0.0f);
 
+	private Action weaponAppliedDamageCallback = null;
 
 	public void Initialize()
 	{
@@ -37,6 +38,11 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 
 		markedAsReadyToDestroy.ValueChanged += DestroyProjectile;
 		readyToLaunchExplosion.ValueChanged += DetonateProjectile;
+	}
+
+	public void SetApplyingDamageCallback(Action weaponAppliedDamage)
+	{
+		weaponAppliedDamageCallback = weaponAppliedDamage;
 	}
 
 	private void UpdateColliderEnabled(bool lastValue, bool newValue)
@@ -84,6 +90,7 @@ public class ProjectileBullet : ElympicsMonoBehaviour, IUpdatable, IInitializabl
 			return;
 
 		readyToLaunchExplosion.Value = true;
+		weaponAppliedDamageCallback?.Invoke();
 	}
 
 	private void DetonateProjectile(bool lastValue, bool newValue)

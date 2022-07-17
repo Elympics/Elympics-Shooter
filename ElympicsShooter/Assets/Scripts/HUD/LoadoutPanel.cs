@@ -13,9 +13,9 @@ public class LoadoutPanel : MonoBehaviour
 	private void Awake()
 	{
 		if (playersProvider.IsReady)
-			InitializePanelBasedOnClientPlayer(playersProvider.ClientPlayer);
+			InitializePanelBasedOnClientPlayer();
 		else
-			playersProvider.IsReadyChanged += OnPlayersProviderInitialized;
+			playersProvider.IsReadyChanged += InitializePanelBasedOnClientPlayer;
 
 		foreach (WeaponInLoadoutPanelView loadoutWeaponIcon in loadoutWeaponIcons)
 			loadoutWeaponIcon.UpdateWeaponView(false);
@@ -24,13 +24,10 @@ public class LoadoutPanel : MonoBehaviour
 		UpdateCurrentEquipedWeaponView(0, 0);
 	}
 
-	private void OnPlayersProviderInitialized()
+	private void InitializePanelBasedOnClientPlayer()
 	{
-		InitializePanelBasedOnClientPlayer(playersProvider.ClientPlayer);
-	}
+		var clientPlayer = playersProvider.ClientPlayer;
 
-	private void InitializePanelBasedOnClientPlayer(PlayerData clientPlayer)
-	{
 		clientPlayer.LoadoutController.CurrentEquipedWeaponIndex.ValueChanged += UpdateCurrentEquipedWeaponView;
 	}
 
