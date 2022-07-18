@@ -5,11 +5,13 @@
 ![Elympics](Resources/images/logo-light.png#gh-dark-mode-only)
 ![Elympics](Resources/images/logo-dark.png#gh-light-mode-only)
 
-# Elympics Shooter template!
+# Elympics open-source FPS template
 
-This repository is a *free* FPS shooter template. It is meant to be a learning resource designed as a sample game project to help you understand Elympics – the industry standard frameworks for blockchain-integrated multiplayer games.
+This repository is a *free* FPS template for Unity game developers that want to build their first multiplayer shooter. We designed it as a sample browser game to give you a real feel of its possibilities, but you can also access its source code here.
+You can use it as a basis for your own shooter or any other multiplayer game for 2-4 players: the mechanics it features are universal and may be re-used for other genres. You can find their complete list in the next section.
 
-> Feel free to grab this source code and use it as a basis for your own projects.
+This template is meant to be a learning resource for the new users of Elympics, our standard industry framework for blockchain-integrated multiplayer games. It’ll help you understand how it works and show you the good practices related to it. You can easily integrate it with blockchain using our Web3 Kit – contact us at hello@elympics.cc for more details.
+
 
 > __IMPORTANT__: 
 > This project uses Git Large Files Support (LFS). Downloading this repository in a zip file **will not work**. You need to clone this repo using `git clone` with LFS.
@@ -24,27 +26,28 @@ This repository is a *free* FPS shooter template. It is meant to be a learning r
 
 ## Features
 
-> These features will be implemented and documented on our blog as well.
+> We’re going to implement and document the following features.
+Status: ✅ – done, 🔄 – in progress
 
 | Feature | Implementation | Documentation |
 |---------|:--------------:|:-------------:|
-| Character movement | ✅ | 👨‍💻 |
+| Character movement | ✅ | 🔄 |
 | Jumping | ✅ | 👨‍💻 |
-| Weapon projectile 🔫 | ✅ | 👨‍💻 |
-| Weapon raycast 🔦 | ✅ | ⛔️ |
-| Weapon switching ♼ | ✅ | ⛔️ |
-| Dealing damage 💥 | ✅ | ⛔️ |
-| Player HP system | ✅ | ⛔️ |
-| Player respawn 💆 | ✅ | ⛔️ |
-| Match phase synchronization (start and finish based on predefined criteria) | ✅ | ⛔️ |
-| Basic HUD display 🖥 | ✅ | ⛔️ |
-| Kill cam 🎥 | ✅ | ⛔️ |
-| Character animation synchronized 🏃 | ⛔️ | ⛔️ |
-| Kill implementation 💀 | ⛔️ | ⛔️ |
+| Weapon projectile 🔫 | ✅ | 🔄 |
+| Weapon raycast 🔦 | ✅ | 🔄 |
+| Weapon switching ♼ | ✅ | 🔄 |
+| Dealing damage 💥 | ✅ | 🔄 |
+| Player HP system | ✅ | 🔄 |
+| Player respawn 💆 | ✅ | 🔄 |
+| Match phase synchronization (start and finish based on predefined criteria) | ✅ | 🔄 |
+| Basic HUD display 🖥 | ✅ | 🔄 |
+| Kill cam 🎥 | ✅ | 🔄 |
+| Character animation synchronized 🏃 | ✅ | 🔄 |
+| Kill implementation 💀 | ✅ | 🔄 |
 
 ## Delivery
 
-> This game will be available when the template is fully functional
+> You’ll be able to play the game in the browser when the template is fully functional.
 
 - Deployment: [https://shooter-demo.elympics.cc](https://shooter-demo.elympics.cc)
 - Username: `*******`
