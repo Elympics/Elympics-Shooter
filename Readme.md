@@ -32,7 +32,7 @@ Status: ✅ – done, 🔄 – in progress
 | Feature | Implementation | Documentation |
 |---------|:--------------:|:-------------:|
 | Character movement | ✅ | 🔄 |
-| Jumping | ✅ | 👨‍💻 |
+| Jumping | ✅ | 🔄 |
 | Weapon projectile 🔫 | ✅ | 🔄 |
 | Weapon raycast 🔦 | ✅ | 🔄 |
 | Weapon switching ♼ | ✅ | 🔄 |
