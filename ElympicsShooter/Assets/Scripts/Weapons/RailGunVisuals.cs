@@ -7,7 +7,7 @@ using Elympics;
 using Cinemachine;
 
 [RequireComponent(typeof(RailGun))]
-public class RailGunVisuals : ElympicsMonoBehaviour
+public class RailGunVisuals : ElympicsMonoBehaviour, IInitializable
 {
 	[Header("References:")]
 	[SerializeField] private Image loadingBar = null;
@@ -24,7 +24,7 @@ public class RailGunVisuals : ElympicsMonoBehaviour
 	private Coroutine trailDeathTimerCoroutine = null;
 	private LineRenderer trailRenderer = null;
 
-	private void Awake()
+	public void Initialize()
 	{
 		trailRenderer = Instantiate(trailRendererPrefab, Vector3.zero, Quaternion.identity);
 

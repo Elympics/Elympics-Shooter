@@ -9,6 +9,8 @@ public class MenuController : MonoBehaviour
 {
 	[SerializeField] private Button playButton = null;
 	[SerializeField] private GameObject matchmakingStatus = null;
+	[SerializeField] private string matchmakingQueueBase = "Default";
+	[SerializeField] private string matchmakingQueueFree = "Free";
 
 	private void Start()
 	{
@@ -26,7 +28,8 @@ public class MenuController : MonoBehaviour
 
 	public void OnPlayClicked()
 	{
-		ElympicsLobbyClient.Instance.PlayOnline();
+		//ElympicsLobbyClient.Instance.PlayOnline();
+		ElympicsLobbyClient.Instance.PlayOnline(null, null, $"{matchmakingQueueBase}:{matchmakingQueueFree}");
 		playButton.interactable = false;
 		matchmakingStatus.SetActive(true);
 	}
