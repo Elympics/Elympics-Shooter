@@ -1,4 +1,5 @@
 using Elympics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class ExplosionArea : ElympicsMonoBehaviour
 	[SerializeField] private ParticleSystem explosionPS = null;
 	[SerializeField] private ElympicsMonoBehaviour bulletOwner = null;
 
+	private Action weaponAppliedDamageCallback = null;
+
 	public void Detonate()
 	{
 		DetectTargetsInExplosionRange();
@@ -20,24 +23,36 @@ public class ExplosionArea : ElympicsMonoBehaviour
 		explosionPS.Play();
 	}
 
+	public void SetApplyingDamageCallback(Action weaponAppliedDamage)
+	{
+		weaponAppliedDamageCallback = weaponAppliedDamage;
+	}
+
 	private void DetectTargetsInExplosionRange()
 	{
 		Collider[] objectsInExplosionRange = Physics.OverlapSphere(this.transform.position, explosionRange);
+		bool damageApplied = false;
 
 		foreach (Collider objectInExplosionRange in objectsInExplosionRange)
 		{
 			if (TargetIsNotBehindObstacle(objectInExplosionRange.transform.root.gameObject))
-				TryToApplyDamageToTarget(objectInExplosionRange.transform.root.gameObject);
+				damageApplied |= TryToApplyDamageToTarget(objectInExplosionRange.transform.root.gameObject);
 		}
+
+		if (damageApplied)
+			weaponAppliedDamageCallback?.Invoke();
 	}
 
-	private void TryToApplyDamageToTarget(GameObject objectInExplosionRange)
+	private bool TryToApplyDamageToTarget(GameObject objectInExplosionRange)
 	{
 		if (objectInExplosionRange.TryGetComponent<StatsController>(out StatsController targetStatsController))
 		{
 			//TODO: Add damage modification depending on distance from explosion center
 			targetStatsController.ChangeHealth(-explosionDamage, (int)bulletOwner.PredictableFor);
+			return true;
 		}
+
+		return false;
 	}
 
 	private bool TargetIsNotBehindObstacle(GameObject objectInExplosionRange)

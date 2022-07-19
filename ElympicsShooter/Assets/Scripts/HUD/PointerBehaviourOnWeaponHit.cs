@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pointer : MonoBehaviour
+public class PointerBehaviourOnWeaponHit : MonoBehaviour
 {
 	[SerializeField] private PlayersProvider playersProvider = null;
 	[SerializeField] private Animator animator = null;
