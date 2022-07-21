@@ -5,7 +5,7 @@
 ![Elympics](Resources/images/logo-light.png#gh-dark-mode-only)
 ![Elympics](Resources/images/logo-dark.png#gh-light-mode-only)
 
-# Elympics open-source FPS template
+# Open-source FPS template by Elympics
 
 This repository is a *free* FPS template for Unity game developers that want to build their first multiplayer shooter. We designed it as a sample browser game to give you a real feel of its possibilities, but you can also access its source code here.
 You can use it as a basis for your own shooter or any other multiplayer game for 2-4 players: the mechanics it features are universal and may be re-used for other genres. You can find their complete list in the next section.
@@ -21,8 +21,8 @@ This template is meant to be a learning resource for the new users of Elympics, 
 
 - Launch this project in Unity
 - Packages (including Elympcis) will download
-- Run it using [local mode](https://docs.elympics.cc/getting-started/run-locally/), or try the [half remote](https://docs.elympics.cc/getting-started/run-locally/#half-remote-mode) option
-- You'll also be able to play it online in the browser [here](https://shooter-demo.elympics.cc/)
+- Run it using the [local mode](https://docs.elympics.cc/getting-started/run-locally/) or try the [half remote](https://docs.elympics.cc/getting-started/run-locally/#half-remote-mode) option to start building on it
+- You can also play it online in the browser [here](https://shooter-demo.elympics.cc/)
 
 ## Features
 
@@ -31,24 +31,23 @@ Status: ✅ – done, 🔄 – in progress
 
 | Feature | Implementation | Documentation |
 |---------|:--------------:|:-------------:|
-| Character movement | ✅ | 🔄 |
-| Jumping | ✅ | 🔄 |
-| Weapon projectile 🔫 | ✅ | 🔄 |
-| Weapon raycast 🔦 | ✅ | 🔄 |
+| Character movement 🚶 | ✅ | 🔄 |
+| Jumping 🤸‍♀️ | ✅ | 🔄 |
+| Projectile weapon 🔫 | ✅ | 🔄 |
+| Raycast weapon 🔦 | ✅ | 🔄 |
 | Weapon switching ♼ | ✅ | 🔄 |
 | Dealing damage 💥 | ✅ | 🔄 |
-| Player HP system | ✅ | 🔄 |
+| Player HP system ❤️‍🩹 | ✅ | 🔄 |
 | Player respawn 💆 | ✅ | 🔄 |
-| Match phase synchronization (start and finish based on predefined criteria) | ✅ | 🔄 |
-| Basic HUD display 🖥 | ✅ | 🔄 |
+| Match phase synchronization (start and finish based on predefined criteria) 🔂 | ✅ | 🔄 |
+| Basic HUD  🖥 | ✅ | 🔄 |
 | Kill cam 🎥 | ✅ | 🔄 |
 | Character animation synchronized 🏃 | ✅ | 🔄 |
-| Kill implementation 💀 | ✅ | 🔄 |
+| Killing 💀 | ✅ | 🔄 |
 
 ## Delivery
 
 > You’ll be able to play the game in the browser when the template is fully functional.
 
 - Deployment: [https://shooter-demo.elympics.cc](https://shooter-demo.elympics.cc)
-- Username: `*******`
-- Password: `*******`
+
