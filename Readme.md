@@ -40,7 +40,7 @@ Status: ✅ – done, 🔄 – in progress
 | Player HP system ❤️‍🩹 | ✅ | 🔄 |
 | Player respawn 💆 | ✅ | 🔄 |
 | Match phase synchronization (start and finish based on predefined criteria) 🔂 | ✅ | 🔄 |
-| Basic HUD  🖥 | ✅ | 🔄 |
+| Basic HUD 🖥 | ✅ | 🔄 |
 | Kill cam 🎥 | ✅ | 🔄 |
 | Character animation synchronized 🏃 | ✅ | 🔄 |
 | Killing 💀 | ✅ | 🔄 |
